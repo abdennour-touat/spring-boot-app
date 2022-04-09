@@ -1,5 +1,4 @@
 package com.example.demo.user;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -7,7 +6,7 @@ import java.util.Collection;
 
 @Entity
 @Table
-public class AppUSer {
+public class AppUser {
     @Id
     @SequenceGenerator(
             name = "student_sequence",
@@ -24,14 +23,12 @@ public class AppUSer {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
-    public AppUSer() {
+    public AppUser() {
     }
 
-    public AppUSer(Long id, String name, String username, Collection<Role> roles) {
-        this.id = id;
+    public AppUser( String name, String username) {
         this.name = name;
         this.username = username;
-        this.roles = roles;
     }
 
     public Long getId() {

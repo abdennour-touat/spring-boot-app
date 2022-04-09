@@ -1,37 +1,49 @@
 package com.example.demo;
 
+import com.example.demo.user.AppUser;
+import com.example.demo.user.Role;
+import com.example.demo.user.UserRepo;
+import com.example.demo.user.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class DemoApplication {
-//	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-//
-//	@Bean
-//	public CommandLineRunner demo(CustomerRepository repository, StudentRepository studeRepo) {
-//		return (args) -> {
+
+	@Bean
+	public CommandLineRunner demo(UserService userService) {
+		return (args) -> {
+
+			userService.saveRole(new Role(null,"admin"));
+			userService.saveRole(new Role(null,"super_admin"));
+			userService.saveRole(new Role(null,"watcher"));
+
+
 //			// save a few customers
-//			repository.save(new Customer("Jack", "Bauer"));
-//			repository.save(new Customer("Chloe", "O'Brian"));
-//			repository.save(new Customer("Kim", "Bauer"));
-//			repository.save(new Customer("David", "Palmer"));
-//			repository.save(new Customer("Michelle", "Dessler"));
-//			studeRepo.save(new Student("abdenour", "abdenour@gmail.com", LocalDate.now()));
+//			repository.save(new AppUser("Jack", "Bauer"));
+//			repository.save(new AppUser("Chloe", "O'Brian"));
+//			repository.save(new AppUser("Kim", "Bauer"));
+//			repository.save(new AppUser("David", "Palmer"));
 //
 //			// fetch all customers
 //			log.info("Customers found with findAll():");
 //			log.info("-------------------------------");
-//			for (Customer customer : repository.findAll()) {
-//				log.info(customer.toString());
+//			for (AppUser user : repository.findAll()) {
+//				log.info(user.toString());
 //			}
 //			log.info("");
-//
+
 //			// fetch an individual customer by ID
 //			Customer customer = repository.findById(1L);
 //			log.info("Customer found with findById(1L):");
@@ -49,7 +61,7 @@ public class DemoApplication {
 //			//  log.info(bauer.toString());
 //			// }
 //			log.info("");
-//		};
-//	}
+		};
+	}
 
 }
