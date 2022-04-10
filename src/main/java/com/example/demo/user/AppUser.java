@@ -20,14 +20,15 @@ public class AppUser {
     private Long id;
     private  String name;
     private String username;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private String password;
+    private ArrayList<String> roles = new ArrayList<>();
 
     public AppUser() {
     }
 
-    public AppUser( String name, String username) {
+    public AppUser( String name, String username, String password) {
         this.name = name;
+        this.password = password;
         this.username = username;
     }
 
@@ -55,11 +56,19 @@ public class AppUser {
         this.username = username;
     }
 
-    public Collection<Role> getRoles() {
+    public Collection<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(ArrayList<String> roles) {
         this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

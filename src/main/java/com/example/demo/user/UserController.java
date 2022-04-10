@@ -25,11 +25,6 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
-    @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
-    }
     @PostMapping("/role/affectrole")
     public ResponseEntity<?> affectRole(@RequestBody RoleToUser form) {
         userService.addRole(form.getUsername(), form.getRoleName());

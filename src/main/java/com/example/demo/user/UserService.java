@@ -7,11 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Service  @Transactional @Slf4j
 public class UserService {
-    private final RoleRepo roleRepo;
     private final UserRepo userRepo;
     @Autowired
-    public UserService(RoleRepo roleRepo, UserRepo userRepo) {
-        this.roleRepo = roleRepo;
+    public UserService( UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -19,16 +17,11 @@ public class UserService {
         log.info("saving new user {} to the databas", user.getName());
         return userRepo.save(user);
     };
-    public Role saveRole(Role role){
-        log.info("saving new roel{} to the databas", role.getName());
-        return roleRepo.save(role);
-    };
     public void addRole(String username, String roleName){
         log.info("adding a role {} to user {} ", roleName, username);
         AppUser user = userRepo.findByUsername(username);
-        Role role = roleRepo.findByName(roleName);
-        if (user != null && role != null){
-            user.getRoles().add(role);
+        if (user != null ){
+            user.getRoles().add(roleName);
         }
     }
 

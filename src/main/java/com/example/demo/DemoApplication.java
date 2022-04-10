@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.user.AppUser;
-import com.example.demo.user.Role;
-import com.example.demo.user.UserRepo;
-import com.example.demo.user.UserService;
+import com.example.demo.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -25,42 +22,15 @@ public class DemoApplication {
 	public CommandLineRunner demo(UserService userService) {
 		return (args) -> {
 
-			userService.saveRole(new Role(null,"admin"));
-			userService.saveRole(new Role(null,"super_admin"));
-			userService.saveRole(new Role(null,"watcher"));
+			userService.saveUser(new AppUser("abdenour","abdou" , "password"));
+			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
+			userService.saveUser(new AppUser("mohamed","moh" , "password"));
+			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
 
+			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
+			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("aissa", String.valueOf(Roles.ROLE_USER));
 
-//			// save a few customers
-//			repository.save(new AppUser("Jack", "Bauer"));
-//			repository.save(new AppUser("Chloe", "O'Brian"));
-//			repository.save(new AppUser("Kim", "Bauer"));
-//			repository.save(new AppUser("David", "Palmer"));
-//
-//			// fetch all customers
-//			log.info("Customers found with findAll():");
-//			log.info("-------------------------------");
-//			for (AppUser user : repository.findAll()) {
-//				log.info(user.toString());
-//			}
-//			log.info("");
-
-//			// fetch an individual customer by ID
-//			Customer customer = repository.findById(1L);
-//			log.info("Customer found with findById(1L):");
-//			log.info("--------------------------------");
-//			log.info(customer.toString());
-//			log.info("");
-//
-//			// fetch customers by last name
-//			log.info("Customer found with findByLastName('Bauer'):");
-//			log.info("--------------------------------------------");
-//			repository.findByLastName("Bauer").forEach(bauer -> {
-//				log.info(bauer.toString());
-//			});
-//			// for (Customer bauer : repository.findByLastName("Bauer")) {
-//			//  log.info(bauer.toString());
-//			// }
-//			log.info("");
 		};
 	}
 
