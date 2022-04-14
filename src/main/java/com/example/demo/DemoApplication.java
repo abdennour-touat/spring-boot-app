@@ -8,8 +8,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ldap.core.ContextSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
+import org.springframework.security.ldap.server.UnboundIdContainer;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
@@ -24,6 +27,7 @@ public class DemoApplication {
 	PasswordEncoder passwordEncoder(){
 		return  new BCryptPasswordEncoder();
 	}
+
 	@Bean
 	public CommandLineRunner demo(UserService userService) {
 		return (args) -> {
@@ -32,7 +36,7 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
 			userService.saveUser(new AppUser("mohamed","moh" , "password"));
 			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
-			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
+//			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
 
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
