@@ -39,6 +39,12 @@ public class JWTUtility implements Serializable {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
+    public String getUsername(String token){
+        Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
+        JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+        DecodedJWT decodedJWT = jwtVerifier.verify(token);
+        return decodedJWT.getSubject();
+    }
     /* retrieve expiration date from the jwt token */
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
@@ -81,9 +87,7 @@ public class JWTUtility implements Serializable {
         java.util.Arrays.stream(roles).forEach(role ->{
             authorities.add(new SimpleGrantedAuthority(role));
         });
-
         return  new UsernamePasswordAuthenticationToken(username,null, authorities);
-
     }
     /* create the token (define claims and sign the JWT using a hash algo) */
     public Map<String, String> doGeterateTokens(List<String> claims, String subject, String requestUrl) {
