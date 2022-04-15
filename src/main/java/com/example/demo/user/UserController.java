@@ -11,25 +11,21 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/api/v1/")
 public class UserController {
     private final UserService userService;
     @GetMapping("/users")
     public ResponseEntity<List<AppUser>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
-//    @GetMapping("/")
-//    public String index() {
-//        return "Welcome to the home page!";
-//    }
     @PostMapping("/user/save")
     public ResponseEntity<AppUser> saveUser(@RequestBody AppUser user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
     @GetMapping("/role")
-    public ResponseEntity<?> getRoles(){
-        return ResponseEntity.ok().body(Roles.values());
+    public ResponseEntity<List<String>> getRoles(){
+        return ResponseEntity.ok().body(Roles.getRoles());
     }
 
     @PostMapping("/role/affectrole")

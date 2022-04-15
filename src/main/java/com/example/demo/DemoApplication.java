@@ -36,11 +36,13 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
 			userService.saveUser(new AppUser("mohamed","moh" , "password"));
 			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
-//			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
+			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
+			userService.saveUser(new AppUser("joe", "joe", "joespassword"));
 
-			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
-			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
-			userService.addRole("aissa", String.valueOf(Roles.ROLE_USER));
+
+			userService.addRole("abdou", Roles.ROLE_ADMIN);
+			userService.addRole("abdou", Roles.ROLE_EDITOR);
+			userService.addRole("aissa", Roles.ROLE_USER);
 
 		};
 	}
