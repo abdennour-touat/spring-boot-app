@@ -26,6 +26,7 @@ public class UserController {
     @GetMapping("/role")
     public ResponseEntity<List<String>> getRoles(){
         return ResponseEntity.ok().body(Roles.getRoles());
+
     }
 
     @PostMapping("/role/affectrole")

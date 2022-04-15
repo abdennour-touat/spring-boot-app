@@ -8,11 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.ldap.core.ContextSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
-import org.springframework.security.ldap.server.UnboundIdContainer;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
@@ -22,10 +19,9 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
 	@Bean
-	PasswordEncoder passwordEncoder(){
-		return  new BCryptPasswordEncoder();
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -40,9 +36,9 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("joe", "joe", "joespassword"));
 
 
-			userService.addRole("abdou", Roles.ROLE_ADMIN);
-			userService.addRole("abdou", Roles.ROLE_EDITOR);
-			userService.addRole("aissa", Roles.ROLE_USER);
+			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
+			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("aissa", String.valueOf(Roles.ROLE_USER));
 
 		};
 	}
