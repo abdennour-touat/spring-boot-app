@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,6 +22,9 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/*
+* The user controller contains the methods to make the http requests
+* */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
@@ -51,6 +52,7 @@ public class UserController {
         userService.addRole(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
+    //this method is to refresh the token when it expires..
     @GetMapping("/token/refresh")
     public void refreshToken (HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);

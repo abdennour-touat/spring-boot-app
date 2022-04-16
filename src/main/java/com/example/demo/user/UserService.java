@@ -14,11 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+/*
+* The user service class contains functions to get the user data from the database
+* */
 @Service  @Transactional @Slf4j @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
+    //this function search for a user in the database and
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = userRepo.findByUsername(username);
@@ -28,6 +32,7 @@ public class UserService implements UserDetailsService {
         }else {
             log.info("user found in the database {}", username);
         }
+        //we make a list of granted authroties to add it to the user details service
          Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role ->{
             authorities.add(new SimpleGrantedAuthority(role));

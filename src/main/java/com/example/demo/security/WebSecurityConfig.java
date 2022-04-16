@@ -25,9 +25,13 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @RequiredArgsConstructor
 @Order(1)
+//the websecurity config is where the authentication happens here we're making two types of authentication
+// we're attempting to authenticate the user in the ldap server and in our database at the same time
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final JWTUtility jwtUtility;
+    //in this method we put our http configuration and securing our routes
+    //we add our filters here too
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), jwtUtility);
@@ -55,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilter(customAuthenticationFilter) ;
         http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
     }
+    //in this method we apply the ldap authentication logic and tell it to check the credentials in the database at the same time
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
                 auth.ldapAuthentication()

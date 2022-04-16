@@ -4,8 +4,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
+/*
+* the appuser is the user class and it'll create a table for the user in the database
+* */
 @Entity
 @Table
 @Data

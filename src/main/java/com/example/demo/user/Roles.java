@@ -2,6 +2,7 @@ package com.example.demo.user;
 
 import java.util.List;
 
+//the roles class contains the roles
 public class Roles {
     public static String ROLE_ADMIN = "ROLE_ADMIN";
     public static  String ROLE_EDITOR = "ROLE_EDITOR";

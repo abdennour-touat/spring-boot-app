@@ -21,6 +21,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+//the authorization filter that check if the token is valid and has the authority to access the api
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -32,7 +33,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
              filterChain.doFilter(request, response);
         }else {
             String authorizationHeader = request.getHeader( AUTHORIZATION);
-
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
                 try {
                     String token = jwtUtility.getToken(authorizationHeader);
@@ -48,11 +48,9 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     error.put("error_message", e.getMessage());
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
-
             }else {
                 filterChain.doFilter(request, response );
             }
         }
-
     }
 }
