@@ -1,6 +1,6 @@
-package com.example.demo.user;
+package com.FATCA.API.user;
 
-import com.example.demo.security.JWTUtility;
+import com.FATCA.API.security.JWTUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package com.example.demo.user;
+package com.FATCA.API.user;
 
-import com.example.demo.history.History;
+import com.FATCA.API.history.History;
 import lombok.Data;
 
 import javax.persistence.*;

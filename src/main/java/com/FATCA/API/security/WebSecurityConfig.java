@@ -1,9 +1,10 @@
-package com.example.demo.security;
+package com.FATCA.API.security;
 
 
-import com.example.demo.security.filter.CustomAuthenticationFilter;
-import com.example.demo.security.filter.CustomAuthorizationFilter;
+import com.FATCA.API.security.filter.CustomAuthenticationFilter;
+import com.FATCA.API.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -17,8 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.ldap.authentication.UserDetailsServiceLdapAuthoritiesPopulator;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletResponse;
-
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
@@ -28,6 +27,12 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 //the websecurity config is where the authentication happens here we're making two types of authentication
 // we're attempting to authenticate the user in the ldap server and in our database at the same time
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Value("${ldap.auth.userdn}")
+    private String userDn;
+    @Value("${ldap.auth.base}")
+    private String base;
+    @Value("${ldap.auth.url}")
+    private String url;
     private final UserDetailsService userDetailsService;
     private final JWTUtility jwtUtility;
     //in this method we put our http configuration and securing our routes
@@ -63,10 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
                 auth.ldapAuthentication()
-                .userDnPatterns("uid={0},ou=people")
-                .groupSearchBase("ou=groups")
+                .userDnPatterns(userDn)
+                .groupSearchBase(base)
                 .contextSource()
-                .url("ldap://localhost:8389/dc=springframework,dc=org")
+                .url(url)
                 .and()
                 .passwordCompare()
                 .passwordEncoder(new BCryptPasswordEncoder())

@@ -1,6 +1,6 @@
-package com.example.demo.history;
+package com.FATCA.API.history;
 
-import com.example.demo.user.AppUser;
+import com.FATCA.API.user.AppUser;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

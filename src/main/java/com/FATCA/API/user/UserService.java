@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.FATCA.API.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

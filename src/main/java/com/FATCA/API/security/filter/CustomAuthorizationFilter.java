@@ -1,6 +1,6 @@
-package com.example.demo.security.filter;
+package com.FATCA.API.security.filter;
 
-import com.example.demo.security.JWTUtility;
+import com.FATCA.API.security.JWTUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

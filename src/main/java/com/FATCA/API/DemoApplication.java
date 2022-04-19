@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.FATCA.API;
 
-import com.example.demo.user.*;
+import com.FATCA.API.user.AppUser;
+import com.FATCA.API.user.Roles;
+import com.FATCA.API.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
