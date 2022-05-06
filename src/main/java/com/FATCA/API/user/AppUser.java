@@ -30,7 +30,7 @@ public class AppUser {
             updatable = false
     )
     private Long id;
-    private  String name;
+//    private  String name;
     @Column(
             nullable = false,
             unique = true
@@ -50,7 +50,7 @@ public class AppUser {
     }
 
     public AppUser( String name, String username, String password) {
-        this.name = name;
+//        this.name = name;
         this.password = password;
         this.username = username;
     }

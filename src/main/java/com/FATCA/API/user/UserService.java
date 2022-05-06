@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
 
 
      public AppUser saveUser(AppUser user){
-        log.info("saving new user {} to the database", user.getName());
+        log.info("saving new user {} to the database", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     };

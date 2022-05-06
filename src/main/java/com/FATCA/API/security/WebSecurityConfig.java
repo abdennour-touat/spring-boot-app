@@ -60,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/**");
 //        http.antMatcher("/users/**").authorizeRequests().anyRequest().fullyAuthenticated();
         http.authorizeRequests()
-                .anyRequest().authenticated().and();
-        http.addFilter(customAuthenticationFilter) ;
-        http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().permitAll().and();
+//        http.addFilter(customAuthenticationFilter) ;
+//        http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
     }
     //in this method we apply the ldap authentication logic and tell it to check the credentials in the database at the same time
     @Override
