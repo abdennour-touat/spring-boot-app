@@ -1,5 +1,7 @@
 package com.FATCA.API;
 
+import com.FATCA.API.fileStorage.FilesStorageService;
+import com.FATCA.API.fileStorage.FilesStorageServiceImpl;
 import com.FATCA.API.user.AppUser;
 import com.FATCA.API.user.Roles;
 import com.FATCA.API.user.UserService;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +31,12 @@ import java.io.InputStream;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @Configuration
 public class DemoApplication {
+	@Bean
+	FilesStorageService filesStorageService(){
+		return  new FilesStorageServiceImpl();
+	}
 	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -39,9 +47,10 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserService userService) {
+	public CommandLineRunner demo(UserService userService, FilesStorageService storageService) {
 		return (args) -> {
-
+			storageService.deleteAll();
+			storageService.init();
 			userService.saveUser(new AppUser("abdenour","abdou" , "password"));
 			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
 			userService.saveUser(new AppUser("mohamed","moh" , "password"));

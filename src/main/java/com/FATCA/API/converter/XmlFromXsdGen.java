@@ -9,8 +9,11 @@ import org.w3c.dom.Element;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Result;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.stream.StreamResult;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class XmlFromXsdGen {
@@ -18,7 +21,8 @@ public class XmlFromXsdGen {
         final Document doc = loadXsdDocument(xsdPath);
         Element rootElem = doc.getDocumentElement();
         XSModel xsModel = new XSParser().parse(xsdPath);
-        String result = "";
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        String finalString = "";
         try {
             XSInstance instance = new XSInstance();
             instance.minimumElementsGenerated = 1;
@@ -31,14 +35,15 @@ public class XmlFromXsdGen {
             instance.generateOptionalElements = true;
 //        instance.generateFixedAttributes = true;
 //        instance.maximumListItemsGenerated = 1;
-            QName rootElement = new QName(rootElem.getAttribute("targetNamespace"), localPart);
+            QName rootElement = new QName(rootElem.getAttribute("targetNamespace"), "FATCA_OECD");
             XMLDocument sampleXml = new XMLDocument(new StreamResult(result), false, 4, null);
             instance.generate(xsModel, rootElement, sampleXml);
+             finalString = result.toString();
         } catch (TransformerConfigurationException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        return result;
+        return finalString;
     }
 
     public static Document loadXsdDocument(String inputName) {

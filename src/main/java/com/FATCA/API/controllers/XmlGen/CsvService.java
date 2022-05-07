@@ -1,15 +1,9 @@
-package com.FATCA.API.api;
+package com.FATCA.API.controllers.XmlGen;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
