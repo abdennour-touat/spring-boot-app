@@ -40,7 +40,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                  break;
              case "template":
                  try {
-                     Files.copy(file.getInputStream(), root.resolve(templateStore).resolve(Objects.requireNonNull(file.getOriginalFilename())));
+                     Files.copy(file.getInputStream(), templateStore.resolve(Objects.requireNonNull(file.getOriginalFilename())));
                  } catch (Exception e) {
                      throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
                  }
@@ -62,7 +62,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             case "xsd":
                 try {
                     Path file = xsdStore.resolve(filename);
-                    System.out.println(file.toString());
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists() ) {
                         return file.toString();
@@ -75,7 +74,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             case "template":
                 try {
                     Path file = templateStore.resolve(filename);
-                    System.out.println(file);
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists() ) {
                         return file.toString();
@@ -88,7 +86,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             default:
                 try {
                     Path file = root.resolve(filename);
-                    System.out.println(file);
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists()) {
                         return file.toString();
