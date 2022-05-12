@@ -5,8 +5,9 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,9 +25,24 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             Files.createDirectory(root);
             Files.createDirectory(xsdStore);
             Files.createDirectory(templateStore);
+            Files.createFile(Paths.get("uploads/main.txt"));
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
+    }
+    @Override
+    public void insert(String filename, String content)  {
+        try {
+            FileWriter myWriter = new FileWriter(filename);
+            System.out.println(myWriter.toString());
+            myWriter.write(content);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
     @Override
     public void save(MultipartFile file, String path) {
