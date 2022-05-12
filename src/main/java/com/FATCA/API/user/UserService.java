@@ -1,5 +1,7 @@
 package com.FATCA.API.user;
 
+import com.FATCA.API.table.DataTable;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
 /*
 * The user service class contains functions to get the user data from the database
 * */
@@ -53,6 +57,10 @@ public class UserService implements UserDetailsService {
             user.getRoles().add(roleName);
         }
     }
+//    public List<DataTable> getTables(AppUser user){
+//        AppUser tableUser = userRepo.getById(user.getId());
+//        return tableUser.getTables();
+//    }
 
    public AppUser getUser(String username){
         log.info("fetching user {}", username);

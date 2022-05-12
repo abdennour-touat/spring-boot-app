@@ -6,6 +6,7 @@ import com.FATCA.API.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +24,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
-@Order(1)
+@ComponentScan(basePackages = {"com.FACTA.API"})
 //the websecurity config is where the authentication happens here we're making two types of authentication
 // we're attempting to authenticate the user in the ldap server and in our database at the same time
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {

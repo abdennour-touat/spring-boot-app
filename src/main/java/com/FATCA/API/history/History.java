@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -18,9 +20,9 @@ public class History {
     @Column(name = "History_text", nullable = false)
     private String text;
     private Date date = new Date();
-    @ManyToOne()
-    @JoinColumn(name = "user_id")
-    private AppUser user ;
+    @ManyToMany()
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_history"))
+    private List<AppUser> historyUsers ;
 
 
 }
