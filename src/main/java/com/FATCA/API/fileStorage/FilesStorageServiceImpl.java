@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.MalformedURLException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -56,7 +55,15 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                  break;
              case "template":
                  try {
-                     Files.copy(file.getInputStream(), templateStore.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+                     File directory = new File("C:\\JavaProgram");
+                     if (directory.isDirectory()) {
+                         String[] files = directory.list();
+                         if (directory.length() < 0) {
+                             Files.copy(file.getInputStream(), templateStore.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+                         } else {
+                             throw new Exception("there's already a template file, delete the old one to insert a new one");
+                         }
+                     }
                  } catch (Exception e) {
                      throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
                  }
@@ -69,8 +76,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                  }
                  break;
          }
-
-
     }
     @Override
     public String load(String filename, String path) {
@@ -113,8 +118,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                 }
 
         }
-
-
     }
     @Override
     public void deleteAll() {
@@ -128,4 +131,13 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             throw new RuntimeException("Could not load the files!");
         }
     }
+    public String getTemplate() throws Exception {
+      File dir = new File(templateStore.toUri());
+      if (dir.isDirectory()){
+          return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
+      }else {
+          throw new Exception("directory is empty");
+      }
+    }
 }
+

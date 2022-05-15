@@ -1,6 +1,7 @@
 package com.FATCA.API.controllers.XmlGen;
 
 import com.FATCA.API.converter.XmlCsvGen;
+import com.FATCA.API.fileStorage.FilesStorageServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -20,11 +21,17 @@ import java.util.List;
 @Slf4j
 public class Controller {
     private final CsvService csvService;
+    FilesStorageServiceImpl filesStorageService;
 //    @PostMapping("/convert")
     @PostMapping(path="/convert" )
     public ResponseEntity<?> convertToXml(@RequestParam("file")MultipartFile file){
         List<String[]> data =csvService.getCsvFile(file);
-        String result = XmlCsvGen.generate(data, "result.xml");
+        String result = null;
+        try {
+            result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(result, headers, HttpStatus.CREATED);
     }
