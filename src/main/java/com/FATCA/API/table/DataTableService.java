@@ -27,9 +27,9 @@ public class DataTableService {
     private final UserRepo userRepo;
     private final CsvService csvService;
 
-    public List<DataTable> getUserTables(AppUser user){
-        AppUser owner = userRepo.getById(user.getId());
-       return  owner.getTables();
+    public List<DataTable> getUserTables(Long id){
+        AppUser owner = userRepo.getById(id);
+       return  dataTableRepo.findByOwner(owner);
     }
     public void addTable(DataTable table) throws Exception {
         AppUser owner = userRepo.findByUsername(table.getOwner().getUsername());
@@ -50,6 +50,9 @@ public class DataTableService {
     }
     public ArrayList<String[]> csvToArray(MultipartFile file){
         return (ArrayList<String[]>) csvService.getCsvFile(file);
+    }
+    public List<DataTable> getAllTables(){
+        return dataTableRepo.findAll();
     }
 
 }

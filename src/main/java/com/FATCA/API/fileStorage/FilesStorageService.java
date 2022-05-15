@@ -15,4 +15,5 @@ public interface FilesStorageService {
     public void deleteAll();
     public Stream<Path> loadAll();
     public void insert(String filename, String content) throws IOException;
+    public String getTemplate() throws Exception;
 }

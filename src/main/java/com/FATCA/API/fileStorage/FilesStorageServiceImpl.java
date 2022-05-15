@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -55,15 +56,17 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                  break;
              case "template":
                  try {
-                     File directory = new File("C:\\JavaProgram");
-                     if (directory.isDirectory()) {
-                         String[] files = directory.list();
-                         if (directory.length() < 0) {
-                             Files.copy(file.getInputStream(), templateStore.resolve(Objects.requireNonNull(file.getOriginalFilename())));
-                         } else {
-                             throw new Exception("there's already a template file, delete the old one to insert a new one");
-                         }
-                     }
+                     System.out.println("hello");
+                     Files.copy(file.getInputStream(), templateStore.resolve(Objects.requireNonNull(file.getOriginalFilename())));
+//                     File directory = new File(templateStore.toUri());
+//                     BasicFileAttributes basicFileAttributes = Files.readAttributes(directory.toPath(), BasicFileAttributes.class);
+//                     if (basicFileAttributes.isDirectory()) {
+//                         String[] files = directory.list();
+//                         if (basicFileAttributes.size() < 0) {
+//                         } else {
+//                             throw new Exception("there's already a template file, delete the old one to insert a new one");
+//                         }
+//                     }
                  } catch (Exception e) {
                      throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
                  }
@@ -132,7 +135,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
         }
     }
     public String getTemplate() throws Exception {
-      File dir = new File(templateStore.toUri());
+//        System.out.println(templateStore.toUri());
+      File dir = new File("uploads/templateFiles");
       if (dir.isDirectory()){
           return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
       }else {

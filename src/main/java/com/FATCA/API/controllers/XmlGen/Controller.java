@@ -1,9 +1,11 @@
 package com.FATCA.API.controllers.XmlGen;
 
 import com.FATCA.API.converter.XmlCsvGen;
+import com.FATCA.API.fileStorage.FilesStorageService;
 import com.FATCA.API.fileStorage.FilesStorageServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +23,8 @@ import java.util.List;
 @Slf4j
 public class Controller {
     private final CsvService csvService;
-    FilesStorageServiceImpl filesStorageService;
+    @Autowired
+    private final FilesStorageService filesStorageService;
 //    @PostMapping("/convert")
     @PostMapping(path="/convert" )
     public ResponseEntity<?> convertToXml(@RequestParam("file")MultipartFile file){

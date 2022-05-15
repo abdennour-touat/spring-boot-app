@@ -35,8 +35,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/api/v1/")
 @Slf4j
 public class UserController {
-    //TODO:upload csv file
-    //TODO:get all the csv files
+    //DONE:upload csv file
+    //Done:get all the csv files
     //TODO:convert a csv file into an xml file (not zipped)
     //TODO: convert and zip the xml file with a password
     //TODO: get an existing csv file
@@ -101,6 +101,10 @@ public class UserController {
         AppUser user = userService.getUser(username);
         dataTableService.addTable(new DataTable(user, data));
         return ResponseEntity.ok().body(data);
+    }
+    @GetMapping("/getcsvFiles")
+    public ResponseEntity<?> getCsvFiles(){
+        return ResponseEntity.ok().body(dataTableService.getAllTables());
     }
 
 

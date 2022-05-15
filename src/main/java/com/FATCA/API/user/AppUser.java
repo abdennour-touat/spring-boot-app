@@ -47,8 +47,7 @@ public class AppUser {
     @OneToMany(mappedBy = "historyUsers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<History> userHistory ;
 
-    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    private List<DataTable> tables;
+
     public AppUser() {
     }
 

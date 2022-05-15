@@ -35,7 +35,12 @@ public class XmlCsvGen {
 //            CSVReader reader = new CSVReader(new FileReader(fileName));
 //            List<String[]> r = reader.readAll();
 
+            System.out.println(data);
             ArrayList<String[]> table = new ArrayList<>(data.subList(1, data.size()-1));
+//            for (String[] str:table){
+//                System.out.println(Arrays.toString(str));
+//            }
+//            ArrayList<String[]> table = (ArrayList<String[]>) data;
             //we get the first line which contains the columns name
 //            List<String> c = Arrays.asList(r.get(0)[0].split(";"));
             ArrayList<String> columns = new ArrayList<>(Arrays.asList(data.get(0)));
@@ -46,12 +51,14 @@ public class XmlCsvGen {
             //we loop through every line and try to insert every value possible...
             for (int lineCount = 1 ; lineCount< table.size(); lineCount++) {
                 //we get the line of data
-                ArrayList<String> dataLine = new ArrayList<>(Arrays.stream(table.get(lineCount)[0].split(";")).toList());
+                System.out.println(Arrays.toString(table.get(lineCount)));
+                ArrayList<String> dataLine = new ArrayList<>(Arrays.stream(table.get(lineCount)).toList());
                 //then we loop on on the links block to find matchs...
                 for (int linksCount = 0; linksCount < links.getLength(); linksCount++) {
                     //if we find a valid element node we get its parent and generate
                     //a new element and try to insert the data
                     if (links.item(linksCount).getNodeType() == Node.ELEMENT_NODE) {
+//                        System.out.println(links.item(linksCount));
                         Element parent = dataLine.contains("type")? (Element) doc.
                                 getElementsByTagName(links.item(linksCount).getNodeName()).
                                 item(Integer.parseInt(dataLine.get(0))-1).
@@ -59,6 +66,7 @@ public class XmlCsvGen {
                                 getElementsByTagName(links.item(linksCount).getNodeName()).
                                 item(0).
                                 getParentNode();
+//                        System.out.println(parent);
                         Element newElement = dataLine.contains("type")?(Element) doc.
                                 getElementsByTagName(links.item(linksCount).getNodeName()).
                                 item(Integer.parseInt(dataLine.get(0))-1).
@@ -67,8 +75,11 @@ public class XmlCsvGen {
                                 item(0).
                                 cloneNode(true);
 
+//                        System.out.println(newElement);
                         NodeList nodeBlock = links.item(linksCount).getChildNodes();
                         //now we loop through the links blocks to find the match
+//                        System.out.println("data line"+dataLine);
+//                        System.out.println("columns"+ columns);
                         insertBlocks(nodeBlock, columns, newElement, dataLine);
                         parent.appendChild(newElement);
                     }
@@ -80,6 +91,7 @@ public class XmlCsvGen {
             DOMSource source = new DOMSource(temp);
             StreamResult result = new StreamResult(new StringWriter());
             transformer.transform(source, result);
+//            System.out.println(result.getWriter().toString());
 
             return result.getWriter().toString();
 
