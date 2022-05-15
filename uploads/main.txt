@@ -1,1 +1,0 @@
-FatcaXML_v2.0.xsd

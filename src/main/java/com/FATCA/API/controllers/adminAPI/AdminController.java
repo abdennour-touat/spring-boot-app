@@ -14,12 +14,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,7 +50,6 @@ public class AdminController {
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, String type, boolean isMain) {
         String message = "";
              try {
-                 System.out.println(isMain);
                  if (Objects.equals(type, "xsd")&& isMain){
                      storageService.insert("uploads/main.txt", file.getOriginalFilename());
                  }

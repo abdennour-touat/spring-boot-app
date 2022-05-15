@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /*
-* The main function tot run the application
+* The main function to run the application
 * */
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @Configuration
@@ -49,6 +49,7 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
 //			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
 			userService.saveUser(new AppUser("joe", "joe", "joespassword"));
+
 
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));

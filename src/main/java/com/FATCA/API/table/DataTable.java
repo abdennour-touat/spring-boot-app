@@ -29,11 +29,16 @@ public class DataTable {
     )
     private Long id;
     @Column()
-    private ArrayList<String> data ;
+    private ArrayList<String[]> data ;
 
 
     @ManyToOne
     @JoinColumn(name = "owner_user_id", foreignKey = @ForeignKey(name = "FK_table_user"))
     private AppUser owner;
+
+    public DataTable(AppUser user, ArrayList<String[]> data){
+        this.data = data;
+        this.owner = user;
+    }
 
 }
