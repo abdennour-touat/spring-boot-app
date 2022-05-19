@@ -26,6 +26,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             Files.createDirectory(xsdStore);
             Files.createDirectory(templateStore);
             Files.createFile(Paths.get("uploads/main.txt"));
+//            Files.createFile(Paths.get("uploads/finalFile.xml"));
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
@@ -34,8 +35,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     public void insert(String filename, String content)  {
         try {
             FileWriter myWriter = new FileWriter(filename);
-            System.out.println(myWriter.toString());
             myWriter.write(content);
+
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {

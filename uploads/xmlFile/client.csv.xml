@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?><ftc:FATCA_OECD xmlns:ftc="urn:oecd:ties:fatca:v2" xmlns:sfa="urn:oecd:ties:stffatcatypes:v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="urn:oecd:ties:fatca:v2 FatcaXML_v2.0.xsd">
+      <ftc:MessageSpec>
+        <sfa:SendingCompanyIN>740U5N.99999.SL.012</sfa:SendingCompanyIN>
+        <sfa:TransmittingCountry>DZ</sfa:TransmittingCountry>
+        <sfa:ReceivingCountry>US</sfa:ReceivingCountry>
+        <sfa:MessageType>FATCA</sfa:MessageType>
+        <sfa:MessageRefId>740U5N.99999.SL.012-2021-08-22T11:46:02</sfa:MessageRefId>
+        <sfa:ReportingPeriod>2020-12-31</sfa:ReportingPeriod>
+        <sfa:Timestamp>2021-08-22T11:46:02</sfa:Timestamp>
+      </ftc:MessageSpec>
+      <ftc:FATCA>
+        <ftc:ReportingFI>
+          <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+          <sfa:TIN issuedBy="US">740U5N.99999.SL.012</sfa:TIN>
+          <sfa:Name>ALSALAM BANK ALGERIA</sfa:Name>
+          <sfa:Address>
+            <sfa:CountryCode>DZ</sfa:CountryCode>
+            <sfa:AddressFix>
+              <sfa:Street>Rue Ahmed Ouaked</sfa:Street>
+              <sfa:PostCode>16302</sfa:PostCode>
+              <sfa:City>Dely Brahim - Algiers</sfa:City>
+            </sfa:AddressFix>
+          </sfa:Address>
+          <ftc:FilerCategory>FATCA601</ftc:FilerCategory>
+          <ftc:DocSpec>
+            <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+            <ftc:DocRefId>740U5N.99999.SL.012.C18FE605-1989-15ZB-74N1-E1C3-ALSA1901</ftc:DocRefId>
+          </ftc:DocSpec>
+        </ftc:ReportingFI>
+        <ftc:ReportingGroup>
+          <ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>the one and only</sfa:FirstName>
+                  <sfa:LastName>MICHAEL NABIL</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>25 Rue KERROUCHE SLIMANE, BIRKHADEM</sfa:Street>
+                    <sfa:PostCode>09022</sfa:PostCode>
+                    <sfa:City>BOUGARA - BLIDA</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>1998-09-11</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport>
+          <ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-45970132-4e3d-414a-b35a-cb8d51499125</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">740U5N.99999.SL.012-45970132-4e3d-414a-b35a-cb8d51499125</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Organisation>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">026820937</sfa:TIN>
+                <sfa:Name>S PHARMACIE</sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>25 Rue KERROUCHE SLIMANE, BIRKHADEM</sfa:Street>
+                    <sfa:PostCode>16005</sfa:PostCode>
+                    <sfa:City>BAB EL OUED - ALGER</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+              </ftc:Organisation>
+              <ftc:AcctHolderType>FATCA103</ftc:AcctHolderType>
+            </ftc:AccountHolder>
+            <ftc:SubstantialOwner>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">026820937</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>SAMIA</sfa:FirstName>
+                  <sfa:LastName>SAMIA</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>25 Rue KERROUCHE SLIMANE, BIRKHADEM</sfa:Street>
+                    <sfa:BuildingIdentifier>N43 BIRTOUTA</sfa:BuildingIdentifier>
+                    <sfa:PostCode>16000</sfa:PostCode>
+                    <sfa:City>BIRTOUTA - ALGIERS</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>1965-12-27</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>DZ</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:SubstantialOwner>
+            <ftc:AccountBalance currCode="DZD">418161.98</ftc:AccountBalance>
+          </ftc:AccountReport>
+        <ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6489245902</ftc:AccountNumber>
+            <ftc:AccountClosed>true</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>BBBB</sfa:FirstName>
+                  <sfa:LastName>BBBB</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>26 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>9001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19991127</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6489245904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>CCCC</sfa:FirstName>
+                  <sfa:LastName>CCCC</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>27 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>9001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19991127</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6485699904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>DDDD</sfa:FirstName>
+                  <sfa:LastName>DDDD</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>28 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>28047</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19800307</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6458803904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>EEEE</sfa:FirstName>
+                  <sfa:LastName>EEEE</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>29 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19661116</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6414069902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>FFFF</sfa:FirstName>
+                  <sfa:LastName>FFFF</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>30 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>44012</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19830720</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6414071240</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>GGGG</sfa:FirstName>
+                  <sfa:LastName>GGGG</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>31 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>44012</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19830720</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6414071260</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>HHHH</sfa:FirstName>
+                  <sfa:LastName>HHHH</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>32 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>44012</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19830720</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">35857904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>IIII</sfa:FirstName>
+                  <sfa:LastName>IIII</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>33 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16005</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19550707</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">35857906</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>JJJJ</sfa:FirstName>
+                  <sfa:LastName>JJJJ</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>34 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16005</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19550707</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">35859898</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>KKKK</sfa:FirstName>
+                  <sfa:LastName>KKKK</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>35 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16005</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19550707</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6443849904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>LLLL</sfa:FirstName>
+                  <sfa:LastName>LLLL</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>36 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>21000</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19611019</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6443849906</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>MMMM</sfa:FirstName>
+                  <sfa:LastName>MMMM</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>37 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>21000</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19611019</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6493089904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>NNNN</sfa:FirstName>
+                  <sfa:LastName>NNNN</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>38 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>5001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19701029</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6493091898</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>OOOO</sfa:FirstName>
+                  <sfa:LastName>OOOO</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>39 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>5001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19701029</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6427315902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>PPPP</sfa:FirstName>
+                  <sfa:LastName>PPPP</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>40 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>9022</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19980911</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6427315904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>QQQQ</sfa:FirstName>
+                  <sfa:LastName>QQQQ</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>41 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>9022</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19980911</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6442241902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>RRRR</sfa:FirstName>
+                  <sfa:LastName>RRRR</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>42 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16046</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19960416</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">71279902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>SSSS</sfa:FirstName>
+                  <sfa:LastName>SSSS</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>43 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16000</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19670429</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">71279904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>TTTT</sfa:FirstName>
+                  <sfa:LastName>TTTT</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>44 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16000</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19670429</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6498067902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName/>
+                  <sfa:LastName/>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>45 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16001</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>20210220</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">53987902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>VVVV</sfa:FirstName>
+                  <sfa:LastName>VVVV</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>46 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16002</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19621001</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6502381902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>WWWW</sfa:FirstName>
+                  <sfa:LastName>WWWW</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>47 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>38003</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19871219</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6433109904</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>XXXX</sfa:FirstName>
+                  <sfa:LastName>XXXX</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>48 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16030</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19820321</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport><ftc:AccountReport>
+            <ftc:DocSpec>
+              <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
+              <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
+            </ftc:DocSpec>
+            <ftc:AccountNumber AcctNumberType="OECD605">6485845902</ftc:AccountNumber>
+            <ftc:AccountClosed>false</ftc:AccountClosed>
+            <ftc:AccountHolder>
+              <ftc:Individual>
+                <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
+                <sfa:TIN issuedBy="US">018821919</sfa:TIN>
+                <sfa:Name>
+                  <sfa:FirstName>YYYY</sfa:FirstName>
+                  <sfa:LastName>YYYY</sfa:LastName>
+                </sfa:Name>
+                <sfa:Address>
+                  <sfa:CountryCode>DZ</sfa:CountryCode>
+                  <sfa:AddressFix>
+                    <sfa:Street>49 RUE KERROUCHE SLIMAN</sfa:Street>
+                    <sfa:PostCode>16026</sfa:PostCode>
+                    <sfa:City> BIRKHADEM</sfa:City>
+                  </sfa:AddressFix>
+                </sfa:Address>
+                <sfa:BirthInfo>
+                  <sfa:BirthDate>19691103</sfa:BirthDate>
+                  <sfa:CountryInfo>
+                    <sfa:CountryCode>US</sfa:CountryCode>
+                  </sfa:CountryInfo>
+                </sfa:BirthInfo>
+              </ftc:Individual>
+            </ftc:AccountHolder>
+            <ftc:AccountBalance currCode="USD">20</ftc:AccountBalance>
+          </ftc:AccountReport></ftc:ReportingGroup>
+      </ftc:FATCA>
+    </ftc:FATCA_OECD>
