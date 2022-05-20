@@ -38,7 +38,7 @@ public class UserController {
     //DONE:upload csv file
     //Done:get all the csv files
     //DONE:convert a csv file into an xml file (not zipped)
-    //TODO: convert and zip the xml file with a password
+    //DONE: convert and zip the xml file with a password
     //TODO: get an existing csv file
     //TODO: save a csv file
     private final UserService userService;

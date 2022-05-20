@@ -2,11 +2,13 @@ package com.FATCA.API.controllers.XmlGen;
 
 import com.FATCA.API.converter.XmlCsvGen;
 import com.FATCA.API.fileStorage.FilesStorageService;
-import com.FATCA.API.fileStorage.ZipUtilsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.io.inputstream.ZipInputStream;
+import net.lingala.zip4j.model.FileHeader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 //import javax.swing.text.Element;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -33,52 +38,44 @@ public class Controller {
     public ResponseEntity<?> convertToXml(@RequestParam("file")MultipartFile file){
         List<String[]> data =csvService.getCsvFile(file);
         String result = null;
+        ByteArrayResource resource;
         try {
             result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
+            resource = new ByteArrayResource(result.getBytes());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(result, headers, HttpStatus.CREATED);
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(resource.contentLength())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
     @PostMapping(path="/convertcompressed" )
-    public ResponseEntity<?> convertSecured(@RequestParam("file")MultipartFile file){
-        List<String[]> data =csvService.getCsvFile(file);
+    public ResponseEntity<?> convertSecured(@RequestParam("file")MultipartFile file) {
+        List<String[]> data = csvService.getCsvFile(file);
         String result = null;
         ZipFile compressed = null;
+        char[] password = csvService.generatePassword(10);
+        byte[] stream;
+        ByteArrayResource resource;
         try {
             result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
-            compressed = csvService.zipWithPassword(result, file.getOriginalFilename(), filesStorageService);
+            compressed = csvService.zipWithPassword(result, file.getOriginalFilename(), password);
+             stream = compressed.getInputStream(compressed.getFileHeaders().get(0)).readAllBytes();
+             resource = new ByteArrayResource(stream);
+             Files.delete(compressed.getFile().toPath());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(compressed, headers, HttpStatus.CREATED);
+        headers.add("password", password.toString());
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentLength(compressed.getBufferSize())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
-//    @PostMapping(path="/convert" )
-//    public ResponseEntity<?> convertToXmlZipped(@RequestParam("file")MultipartFile file){
-//        List<String[]> data =csvService.getCsvFile(file);
-//        String result = null;
-//        try {
-//            result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
-//            File zipped = new File(filePath);
-//            String zipFileName = file.getName().concat(".zip");
-//
-//            FileOutputStream fos = new FileOutputStream(zipFileName);
-//            ZipOutputStream zos = new ZipOutputStream(fos);
-//
-//            zos.putNextEntry(new ZipEntry(file.getName()));
-//
-//            byte[] bytes = Files.readAllBytes(Paths.get(filePath));
-//            zos.write(bytes, 0, bytes.length);
-//            zos.closeEntry();
-//            zos.close();
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//        HttpHeaders headers = new HttpHeaders();
-//        return new ResponseEntity<>(result, headers, HttpStatus.CREATED);
-//    }
 
 }

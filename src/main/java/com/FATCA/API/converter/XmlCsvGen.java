@@ -35,7 +35,6 @@ public class XmlCsvGen {
 //            CSVReader reader = new CSVReader(new FileReader(fileName));
 //            List<String[]> r = reader.readAll();
 
-            System.out.println(data);
             ArrayList<String[]> table = new ArrayList<>(data.subList(1, data.size()-1));
 //            for (String[] str:table){
 //                System.out.println(Arrays.toString(str));
@@ -51,7 +50,7 @@ public class XmlCsvGen {
             //we loop through every line and try to insert every value possible...
             for (int lineCount = 1 ; lineCount< table.size(); lineCount++) {
                 //we get the line of data
-                System.out.println(Arrays.toString(table.get(lineCount)));
+//                System.out.println(Arrays.toString(table.get(lineCount)));
                 ArrayList<String> dataLine = new ArrayList<>(Arrays.stream(table.get(lineCount)).toList());
                 //then we loop on on the links block to find matchs...
                 for (int linksCount = 0; linksCount < links.getLength(); linksCount++) {
