@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,12 +35,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 @Slf4j
-public class UserController {
+public class UserController  {
     //DONE:upload csv file
     //Done:get all the csv files
     //DONE:convert a csv file into an xml file (not zipped)
     //DONE: convert and zip the xml file with a password
-    //TODO: get an existing csv file
+    //DONE: get an existing csv file
     //TODO: save a csv file
     private final UserService userService;
     private final JWTUtility jwtUtility;
@@ -102,10 +103,7 @@ public class UserController {
         dataTableService.addTable(new DataTable(user, data));
         return ResponseEntity.ok().body(data);
     }
-    @GetMapping("/getcsvFiles")
-    public ResponseEntity<?> getCsvFiles(){
-        return ResponseEntity.ok().body(dataTableService.getAllTables());
-    }
+
 
 
 }

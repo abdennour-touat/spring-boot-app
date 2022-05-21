@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface DataTableRepo extends JpaRepository<DataTable, Long> {
-    List<DataTable> findByOwner(AppUser user);
+
+    List<DataTable> findByOwner(AppUser owner);
 }

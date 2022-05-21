@@ -1,8 +1,11 @@
 package com.FATCA.API.table;
 
 import com.FATCA.API.user.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,9 +34,10 @@ public class DataTable {
     @Column()
     private ArrayList<String[]> data ;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_user_id", foreignKey = @ForeignKey(name = "FK_table_user"))
+    @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AppUser owner;
 
     public DataTable(AppUser user, ArrayList<String[]> data){

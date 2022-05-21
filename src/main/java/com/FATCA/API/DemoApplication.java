@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /*
 * The main function to run the application
 * */
+//TODO : handle all the exception
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @Configuration
 public class DemoApplication {

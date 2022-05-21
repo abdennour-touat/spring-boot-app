@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 
-public class DataTableService {
+public class DataTableService  {
     //add a table
     //remove a table
     //get a table
@@ -27,6 +28,9 @@ public class DataTableService {
     private final UserRepo userRepo;
     private final CsvService csvService;
 
+    public List<DataTable> getAllTables(){
+        return dataTableRepo.findAll();
+    }
     public List<DataTable> getUserTables(Long id){
         AppUser owner = userRepo.getById(id);
        return  dataTableRepo.findByOwner(owner);
@@ -50,9 +54,6 @@ public class DataTableService {
     }
     public ArrayList<String[]> csvToArray(MultipartFile file){
         return (ArrayList<String[]>) csvService.getCsvFile(file);
-    }
-    public List<DataTable> getAllTables(){
-        return dataTableRepo.findAll();
     }
 
 }
