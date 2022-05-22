@@ -4,6 +4,7 @@ import com.FATCA.API.controllers.XmlGen.CsvService;
 import com.FATCA.API.user.AppUser;
 import com.FATCA.API.user.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +56,11 @@ public class DataTableService  {
     public ArrayList<String[]> csvToArray(MultipartFile file){
         return (ArrayList<String[]>) csvService.getCsvFile(file);
     }
+    public DataTable updateTable(Long id, List<String[]> data){
+        DataTable table = dataTableRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
+        table.setData((ArrayList<String[]>) data);
 
+        return dataTableRepo.save(table);
+    }
 }

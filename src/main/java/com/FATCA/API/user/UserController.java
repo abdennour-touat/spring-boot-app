@@ -37,7 +37,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class UserController  {
     //DONE:upload csv file
-    //Done:get all the csv files
+    //DONE:get all the csv files
     //DONE:convert a csv file into an xml file (not zipped)
     //DONE: convert and zip the xml file with a password
     //DONE: get an existing csv file

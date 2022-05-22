@@ -3,10 +3,9 @@ package com.FATCA.API.table;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +23,13 @@ public class DataTableController {
         System.out.println(dataTableService.getUserTables(identifier));
 
         return ResponseEntity.ok().body(dataTableService.getUserTables(identifier));
-
+    }
+    @PutMapping("updateCsvFile/{id}")
+    public ResponseEntity<?> updateCsvFile(@PathVariable("id") String id, @RequestBody List<String[]> data){
+        if(!data.isEmpty()){
+            return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), data));
+        }else {
+            return ResponseEntity.badRequest().body("invalid information");
+        }
     }
 }
