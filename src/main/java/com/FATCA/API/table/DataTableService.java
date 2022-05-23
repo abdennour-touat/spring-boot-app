@@ -1,6 +1,8 @@
 package com.FATCA.API.table;
 
 import com.FATCA.API.controllers.XmlGen.CsvService;
+import com.FATCA.API.history.History;
+import com.FATCA.API.history.HistoryService;
 import com.FATCA.API.user.AppUser;
 import com.FATCA.API.user.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +30,14 @@ public class DataTableService  {
     private final DataTableRepo dataTableRepo;
     private final UserRepo userRepo;
     private final CsvService csvService;
+    private final HistoryService historyService;
 
     public List<DataTable> getAllTables(){
         return dataTableRepo.findAll();
     }
     public List<DataTable> getUserTables(Long id){
         AppUser owner = userRepo.getById(id);
+        System.out.println(dataTableRepo.findByOwner(owner).get(0));
        return  dataTableRepo.findByOwner(owner);
     }
     public void addTable(DataTable table) throws Exception {
@@ -48,17 +52,16 @@ public class DataTableService  {
         Optional<DataTable> table = dataTableRepo.findById(id);
         table.ifPresent(dataTableRepo::delete);
     }
-    public void setText(Long id , ArrayList<String[]> text){
-        DataTable dataTable = dataTableRepo.getById(id);
-        dataTable.setData(text);
-        dataTableRepo.save(dataTable);
-    }
+
     public ArrayList<String[]> csvToArray(MultipartFile file){
         return (ArrayList<String[]>) csvService.getCsvFile(file);
     }
-    public DataTable updateTable(Long id, List<String[]> data){
+    public DataTable updateTable(Long id, List<String[]> data, List<String> updateMessage, Long userId){
         DataTable table = dataTableRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
+        AppUser owner = userRepo.getById(userId);
+        historyService.saveHistory(new History(updateMessage, owner));
+
         table.setData((ArrayList<String[]>) data);
 
         return dataTableRepo.save(table);

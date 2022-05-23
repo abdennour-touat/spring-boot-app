@@ -1,5 +1,6 @@
 package com.FATCA.API.table;
 
+import com.FATCA.API.history.History;
 import com.FATCA.API.user.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -9,12 +10,14 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
+
 @RequiredArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 @javax.persistence.Table(name = "data_table")
 public class DataTable {
     @Id
@@ -33,11 +36,13 @@ public class DataTable {
     )
     private Long id;
     @Column()
+//    @JsonIgnore
     private ArrayList<String[]> data ;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+    @ManyToOne
     @JoinColumn(name = "owner_user_id", foreignKey = @ForeignKey(name = "FK_table_user"))
-    @JsonIgnore
+//    @JsonIgnore()
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AppUser owner;
 
@@ -46,4 +51,16 @@ public class DataTable {
         this.owner = user;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        DataTable dataTable = (DataTable) o;
+        return id != null && Objects.equals(id, dataTable.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

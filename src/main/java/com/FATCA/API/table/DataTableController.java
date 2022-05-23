@@ -1,5 +1,7 @@
 package com.FATCA.API.table;
 
+import com.FATCA.API.history.HistoryService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +16,30 @@ import java.util.List;
 public class DataTableController {
     private final DataTableService dataTableService;
     @GetMapping("/getcsvFiles")
-    public ResponseEntity<?> getCsvFiles(){
+    public ResponseEntity<List<DataTable>> getCsvFiles(){
+        System.out.println(dataTableService.getAllTables().get(0).getOwner());
         return ResponseEntity.ok().body(dataTableService.getAllTables());
     }
     @GetMapping("/getcsvFiles/{id}")
-    public ResponseEntity<?> getCsvFile(@PathVariable("id") String id){
+    public ResponseEntity<List<DataTable>> getCsvFile(@PathVariable("id") String id){
         Long identifier = Long.parseLong(id);
-        System.out.println(dataTableService.getUserTables(identifier));
+//        System.out.println(dataTableService.getUserTables(identifier));
 
         return ResponseEntity.ok().body(dataTableService.getUserTables(identifier));
     }
     @PutMapping("updateCsvFile/{id}")
-    public ResponseEntity<?> updateCsvFile(@PathVariable("id") String id, @RequestBody List<String[]> data){
-        if(!data.isEmpty()){
-            return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), data));
+    public ResponseEntity<?> updateCsvFile(@PathVariable("id") String id, @RequestBody UpdateData form){
+        if(!form.getData().isEmpty()){
+            return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), form.getData(), form.getUpdateMessage(), form.getUserId()));
         }else {
             return ResponseEntity.badRequest().body("invalid information");
         }
     }
+}
+
+@Data
+class UpdateData{
+    private List<String[]> data;
+    private List<String> updateMessage;
+    private Long userId;
 }

@@ -1,21 +1,23 @@
 package com.FATCA.API.user;
 
 import com.FATCA.API.history.History;
-import com.FATCA.API.table.DataTable;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 /*
 * the appuser is the user class and it'll create a table for the user in the database
 * */
 @Entity
 @Table
-@Data
+@Getter
+@Setter
+@ToString
 public class AppUser {
     @Id
     @SequenceGenerator(
@@ -41,10 +43,13 @@ public class AppUser {
             nullable = false,
             unique = true
     )
+    @JsonIgnore
     private String password;
     private ArrayList<String> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "historyUsers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "historyUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ToString.Exclude
     private List<History> userHistory ;
 
 
@@ -57,4 +62,16 @@ public class AppUser {
         this.username = username;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        AppUser appUser = (AppUser) o;
+        return id != null && Objects.equals(id, appUser.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
