@@ -36,6 +36,9 @@
               <ftc:DocTypeIndic>FATCA1</ftc:DocTypeIndic>
               <ftc:DocRefId>740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:DocRefId>
             </ftc:DocSpec>
+            <sfa:Test>
+              <sfa:Name>hello</sfa:Name>
+            </sfa:Test>
             <ftc:AccountNumber AcctNumberType="OECD605">740U5N.99999.SL.012-1d586608-c587-4680-a625-42eee7807ed8</ftc:AccountNumber>
             <ftc:AccountClosed>false</ftc:AccountClosed>
             <ftc:AccountHolder>
@@ -72,6 +75,9 @@
             <ftc:AccountNumber AcctNumberType="OECD605">740U5N.99999.SL.012-45970132-4e3d-414a-b35a-cb8d51499125</ftc:AccountNumber>
             <ftc:AccountClosed>false</ftc:AccountClosed>
             <ftc:AccountHolder>
+              <sfa:Test>
+                <sfa:Name>hello</sfa:Name>
+              </sfa:Test>
               <ftc:Organisation>
                 <sfa:ResCountryCode>DZ</sfa:ResCountryCode>
                 <sfa:TIN issuedBy="US">026820937</sfa:TIN>
@@ -129,16 +135,19 @@
       <sfa:City>ADRESSE -VILLe</sfa:City>
       <sfa:PostCode>CODE POStal</sfa:PostCode>
       <sfa:BirthDate>DATE NAISS</sfa:BirthDate>
+      <sfa:Test>
+        <sfa:Name>DATE NAISS</sfa:Name>
+      </sfa:Test>
     </ftc:AccountReport>
-<!--    <ftc:AccountReport id="1">-->
-<!--      <ftc:AccountNumber>compte</ftc:AccountNumber>-->
-<!--      <ftc:AccountClosed>cloture</ftc:AccountClosed>-->
-<!--      <sfa:FirstName>nom</sfa:FirstName>-->
-<!--      <sfa:LastName>prenom</sfa:LastName>-->
-<!--      <sfa:Street>ADRESSE -RUE</sfa:Street>-->
-<!--      <sfa:City>ADRESSE -VILLe</sfa:City>-->
-<!--      <sfa:PostCode>CODE POStal</sfa:PostCode>-->
-<!--      <sfa:BirthDate>DATE NAISS</sfa:BirthDate>-->
-<!--    </ftc:AccountReport>-->
+    <!--    <ftc:AccountReport id="1">-->
+    <!--      <ftc:AccountNumber>compte</ftc:AccountNumber>-->
+    <!--      <ftc:AccountClosed>cloture</ftc:AccountClosed>-->
+    <!--      <sfa:FirstName>nom</sfa:FirstName>-->
+    <!--      <sfa:LastName>prenom</sfa:LastName>-->
+    <!--      <sfa:Street>ADRESSE -RUE</sfa:Street>-->
+    <!--      <sfa:City>ADRESSE -VILLe</sfa:City>-->
+    <!--      <sfa:PostCode>CODE POStal</sfa:PostCode>-->
+    <!--      <sfa:BirthDate>DATE NAISS</sfa:BirthDate>-->
+    <!--    </ftc:AccountReport>-->
   </links>
 </root>

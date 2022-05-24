@@ -110,30 +110,49 @@ public class XmlCsvGen {
         for (int itemCount = 0; itemCount < nodeList.getLength(); itemCount++) {
             //if we find a match columns we take the data line and insert all the valid data....
             if (nodeList.item(itemCount).getNodeType() == Node.ELEMENT_NODE) {
-                if (list.contains(nodeList.item(itemCount).getTextContent().toLowerCase())) {
+//                System.out.println(nodeList.item(itemCount).getNodeName());
+//                System.out.println(nodeList.item(itemCount).getTextContent());
+//                System.out.println(nodeList.item(itemCount).getChildNodes().getLength());
+                if (nodeList.item(itemCount).getChildNodes().getLength() == 1) {
+
+                    if (list.contains(nodeList.item(itemCount).getTextContent().toLowerCase())) {
 //                elt.getElementsByTagName(nodeList.item(itemCount).getNodeName()).item(0).setTextContent(data.get(list.indexOf(nodeList.item(itemCount).getTextContent().toLowerCase())));
 
-                    display(nodeList.item(itemCount), elt, list, data, doc);
-                    if (list.indexOf(nodeList.item(itemCount).getTextContent().toLowerCase()) < data.size()) {
+                        display(nodeList.item(itemCount), elt, list, data, doc);
+
                     }
+                }else if (nodeList.item(itemCount).getChildNodes().getLength() > 1){
+                   NodeList indexedNodes = nodeList.item(itemCount).getChildNodes();
+                   for (int indexedCounter = 0; indexedCounter < indexedNodes.getLength(); indexedCounter ++){
+                       System.out.println(indexedNodes.item(indexedCounter).getNodeName());
+                       System.out.println(indexedNodes.item(indexedCounter).getTextContent());
+                       System.out.println(indexedNodes.item(indexedCounter).getChildNodes().getLength());
+                       if (list.contains(indexedNodes.item(indexedCounter).getTextContent().toLowerCase())) {
+                           display(indexedNodes.item(indexedCounter), elt, list, data, doc);
+
+                       }
+                   }
                 }
+
             }
         }
     }
 
     static void display(Node nd, Element elt, List<String> list, List<String> data, Document doc) throws XPathExpressionException {
+//        System.out.println(nd.getNodeName());
+//        System.out.println(nd.getTextContent());
 
         //we get all the element from the template
         NodeList nodeList = elt.getElementsByTagName(nd.getNodeName());
         //then we should check for every similar node whether they contain a normal content or another child nodes
         for (int item = 0; item < nodeList.getLength(); item++) {
-            System.out.println("////////////");
-            System.out.println("name:");
-            System.out.println(nodeList.item(item).getNodeName());
-            System.out.println("content:");
-                System.out.println(nodeList.item(item).getTextContent());
-            System.out.println("size:");
-            System.out.println(nodeList.item(item).getChildNodes().getLength());
+//            System.out.println("////////////");
+//            System.out.println("name:");
+//            System.out.println(nodeList.item(item).getNodeName());
+//            System.out.println("content:");
+//                System.out.println(nodeList.item(item).getTextContent());
+//            System.out.println("size:");
+//            System.out.println(nodeList.item(item).getChildNodes().getLength());
             //we get the content inside each node..
 
             NodeList nodeContent = nodeList.item(item).getChildNodes();

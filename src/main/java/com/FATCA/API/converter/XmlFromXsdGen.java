@@ -20,7 +20,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 
 //TODO: add parameters to the function for the namespaces
-//TODO: find a solution to the collision tag name
+//DONE: find a solution to the collision tag name
 public class XmlFromXsdGen {
     public static String generateXml(String xsdPath, String localPart) throws ParserConfigurationException, TransformerException {
 //        creating the mockup xml file for the template
