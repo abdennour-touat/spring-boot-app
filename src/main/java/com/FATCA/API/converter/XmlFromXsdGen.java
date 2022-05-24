@@ -58,7 +58,9 @@ public class XmlFromXsdGen {
 //        instance.generateFixedAttributes = true;
 //        instance.maximumListItemsGenerated = 1;
             QName rootElement = new QName(rootElem.getAttribute("targetNamespace"), localPart);
+
             XMLDocument sampleXml = new XMLDocument(new StreamResult(result), false, 4, null);
+//            sampleXml.declarePrefix()
             instance.generate(xsModel, rootElement, sampleXml);
 
             finalString = result.toString();
