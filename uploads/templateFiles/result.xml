@@ -128,7 +128,9 @@
     <ftc:AccountReport  >
       <ftc:AccountNumber>compte</ftc:AccountNumber>
       <ftc:AccountClosed>cloture</ftc:AccountClosed>
-      <sfa:Name>CLOTURE</sfa:Name>
+      <ftc:Organisation>
+        <sfa:Name>CLOTURE</sfa:Name>
+      </ftc:Organisation>
       <sfa:FirstName>nom</sfa:FirstName>
       <sfa:LastName>prenom</sfa:LastName>
       <sfa:Street>ADRESSE -RUE</sfa:Street>

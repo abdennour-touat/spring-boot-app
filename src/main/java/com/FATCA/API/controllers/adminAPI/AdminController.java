@@ -41,7 +41,7 @@ public class AdminController {
     @GetMapping(path = "/getTemplate",produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
     public ResponseEntity<?> getTemplate( templateForm form) throws ParserConfigurationException, TransformerException {
         String schema = storageService.load(form.getXsdName(), "xsd");
-        String result = XmlFromXsdGen.generateXml(schema, form.getLocalPart());
+        String result = XmlFromXsdGen.generateXml(schema, form.getLocalPart(), new String[]{"ftc", "sfa"});
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(result, headers, HttpStatus.CREATED);
     }

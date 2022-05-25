@@ -18,11 +18,12 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.util.List;
 
 //TODO: add parameters to the function for the namespaces
 //DONE: find a solution to the collision tag name
 public class XmlFromXsdGen {
-    public static String generateXml(String xsdPath, String localPart) throws ParserConfigurationException, TransformerException {
+    public static String generateXml(String xsdPath, String localPart, String[] namespaces) throws ParserConfigurationException, TransformerException {
 //        creating the mockup xml file for the template
         DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
@@ -57,13 +58,24 @@ public class XmlFromXsdGen {
             instance.generateOptionalElements = true;
 //        instance.generateFixedAttributes = true;
 //        instance.maximumListItemsGenerated = 1;
-            QName rootElement = new QName(rootElem.getAttribute("targetNamespace"), localPart);
+            QName rootElement = new QName(rootElem.getAttribute("targetNamespace"), localPart, namespaces[0]);
 
             XMLDocument sampleXml = new XMLDocument(new StreamResult(result), false, 4, null);
 //            sampleXml.declarePrefix()
             instance.generate(xsModel, rootElement, sampleXml);
 
             finalString = result.toString();
+            DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(finalString));
+
+            Document document1 = db.parse(is);
+            System.out.println(document1.getNamespaceURI());
+//            for (int counter = 1; counter< namespaces.length; counter++){
+//
+//                    finalString = finalString.replace("ns" + (counter==1?"":counter), namespaces[counter]);
+//
+//            }
             // here we append the template result inside the template element...
            appendXmlFragment(template, finalString);
             return XMLToString(root);
@@ -117,8 +129,11 @@ public class XmlFromXsdGen {
 
     //here we append a fragment string and insert it in parent node
     public static void appendXmlFragment (Node parent, String fragment) throws IOException, SAXException, ParserConfigurationException {
-        DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(false);
+        DocumentBuilder docBuilder = dbf.newDocumentBuilder();
         Document doc = parent.getOwnerDocument();
+
         Node fragmentNode = docBuilder.parse(
                         new InputSource(new StringReader(fragment)))
                 .getDocumentElement();

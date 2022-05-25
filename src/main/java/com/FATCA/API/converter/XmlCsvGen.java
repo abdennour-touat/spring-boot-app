@@ -12,10 +12,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -31,20 +27,16 @@ public class XmlCsvGen {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
-
             //an instance of builder to parse the specified xml file
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(file);
             doc.getDocumentElement().normalize();
             //we read the data from the csv file...
-//            String fileName = csvPath;
             NodeList links = doc.getElementsByTagName("links").item(0).getChildNodes();
-
 
             ArrayList<String[]> table = new ArrayList<>(data.subList(1, data.size() - 1));
 
             //we get the first line which contains the columns name
-//            List<String> c = Arrays.asList(r.get(0)[0].split(";"));
             ArrayList<String> columns = new ArrayList<>(Arrays.asList(data.get(0)));
             //convert every column to lowercase
             Utils.listToLowerCase(columns);
@@ -75,7 +67,7 @@ public class XmlCsvGen {
                                 cloneNode(true);
                         NodeList nodeBlock = links.item(linksCount).getChildNodes();
                         //now we loop through the links blocks to find the match
-                        insertBlocks(nodeBlock, columns, newElement, dataLine, doc);
+                        insertBlocks(nodeBlock, columns, newElement, dataLine);
                         parent.appendChild(newElement);
                     }
                 }
@@ -86,11 +78,8 @@ public class XmlCsvGen {
             DOMSource source = new DOMSource(temp);
             StreamResult result = new StreamResult(new StringWriter());
             transformer.transform(source, result);
-
             return result.getWriter().toString();
-
-        } catch (ParserConfigurationException | SAXException | IOException | TransformerException |
-                 XPathExpressionException e) {
+        } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
             throw new RuntimeException(e);
         }
     }
@@ -106,67 +95,85 @@ public class XmlCsvGen {
         return null;
     }
 
-    public static void insertBlocks(NodeList nodeList, List<String> list, Element elt, List<String> data, Document doc) throws XPathExpressionException {
+    public static void insertBlocks(NodeList nodeList, List<String> list, Element elt, List<String> data)  {
         for (int itemCount = 0; itemCount < nodeList.getLength(); itemCount++) {
             //if we find a match columns we take the data line and insert all the valid data....
             if (nodeList.item(itemCount).getNodeType() == Node.ELEMENT_NODE) {
-//                System.out.println(nodeList.item(itemCount).getNodeName());
-//                System.out.println(nodeList.item(itemCount).getTextContent());
-//                System.out.println(nodeList.item(itemCount).getChildNodes().getLength());
                 if (nodeList.item(itemCount).getChildNodes().getLength() == 1) {
-
                     if (list.contains(nodeList.item(itemCount).getTextContent().toLowerCase())) {
-//                elt.getElementsByTagName(nodeList.item(itemCount).getNodeName()).item(0).setTextContent(data.get(list.indexOf(nodeList.item(itemCount).getTextContent().toLowerCase())));
-
-                        display(nodeList.item(itemCount), elt, list, data, doc);
-
+                        display(nodeList.item(itemCount), elt, list, data);
                     }
-                }else if (nodeList.item(itemCount).getChildNodes().getLength() > 1){
-                   NodeList indexedNodes = nodeList.item(itemCount).getChildNodes();
-                   for (int indexedCounter = 0; indexedCounter < indexedNodes.getLength(); indexedCounter ++){
-                       System.out.println(indexedNodes.item(indexedCounter).getNodeName());
-                       System.out.println(indexedNodes.item(indexedCounter).getTextContent());
-                       System.out.println(indexedNodes.item(indexedCounter).getChildNodes().getLength());
-                       if (list.contains(indexedNodes.item(indexedCounter).getTextContent().toLowerCase())) {
-                           display(indexedNodes.item(indexedCounter), elt, list, data, doc);
+                } else if (nodeList.item(itemCount).getChildNodes().getLength() > 1) {
+                    NodeList indexedNodes = nodeList.item(itemCount).getChildNodes();
+                    for (int indexedCounter = 0; indexedCounter < indexedNodes.getLength(); indexedCounter++) {
 
-                       }
-                   }
+                        if (list.contains(indexedNodes.item(indexedCounter).getTextContent().toLowerCase())) {
+
+                            displayIndexed(indexedNodes.item(indexedCounter), elt, list, data);
+
+                        }
+                    }
                 }
 
             }
         }
     }
 
-    static void display(Node nd, Element elt, List<String> list, List<String> data, Document doc) throws XPathExpressionException {
-//        System.out.println(nd.getNodeName());
-//        System.out.println(nd.getTextContent());
+    static void displayIndexed(Node nd, Element elt, List<String> list, List<String> data)  {
 
         //we get all the element from the template
+        Node parent = nd.getParentNode();
+
         NodeList nodeList = elt.getElementsByTagName(nd.getNodeName());
+        System.out.println(nodeList.getLength());
         //then we should check for every similar node whether they contain a normal content or another child nodes
         for (int item = 0; item < nodeList.getLength(); item++) {
-//            System.out.println("////////////");
-//            System.out.println("name:");
-//            System.out.println(nodeList.item(item).getNodeName());
-//            System.out.println("content:");
-//                System.out.println(nodeList.item(item).getTextContent());
-//            System.out.println("size:");
-//            System.out.println(nodeList.item(item).getChildNodes().getLength());
-            //we get the content inside each node..
+
+//            we get the content inside each node..
 
             NodeList nodeContent = nodeList.item(item).getChildNodes();
             //if the length of the content is less 1 that means that there's only text so we can change it
             //or else it  means theres other nodes and we can't make a change on it
-            if (nodeContent.getLength() > 1) {
-            } else {
-                String info = data.get(list.indexOf(nd.getTextContent().toLowerCase()));
-                Node newNode = nodeContent.item(0).cloneNode(true);
-                newNode.setNodeValue(info);
+            if (nodeContent.getLength() <= 1) {
+                // we add one more check to verify if the target tag is a child of the correct parent tag
+                if (nodeList.item(item).getParentNode().getNodeName().equals(parent.getNodeName())){
+                    String info = data.get(list.indexOf(nd.getTextContent().toLowerCase()));
+                    Node newNode = nodeContent.item(0).cloneNode(true);
+                    newNode.setNodeValue(info);
 
-                nodeList.item(item).removeChild(nodeContent.item(0));
-                nodeList.item(item).appendChild(newNode);
-            }
+                    nodeList.item(item).removeChild(nodeContent.item(0));
+                    nodeList.item(item).appendChild(newNode);
+                }
+
+            }  //
+
+
         }
     }
-}
+        static void display (Node nd, Element elt, List < String > list, List < String > data) {
+
+            //we get all the element from the template
+            NodeList nodeList = elt.getElementsByTagName(nd.getNodeName());
+            //then we should check for every similar node whether they contain a normal content or another child nodes
+            for (int item = 0; item < nodeList.getLength(); item++) {
+
+                //we get the content inside each node..
+
+                NodeList nodeContent = nodeList.item(item).getChildNodes();
+                //if the length of the content is less 1 that means that there's only text so we can change it
+                //or else it  means theres other nodes and we can't make a change on it
+                if (nodeContent.getLength() <= 1) {
+
+                    String info = data.get(list.indexOf(nd.getTextContent().toLowerCase()));
+                    Node newNode = nodeContent.item(0).cloneNode(true);
+                    newNode.setNodeValue(info);
+
+                    nodeList.item(item).removeChild(nodeContent.item(0));
+                    nodeList.item(item).appendChild(newNode);
+                }  //
+
+
+            }
+
+        }
+    }
