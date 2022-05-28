@@ -41,9 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), jwtUtility);
-        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
         http.csrf().disable();
         http.cors().disable();
+        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**" ).permitAll();
 //        http = http
@@ -59,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and();
 
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/**");
-//        http.antMatcher("/users/**").authorizeRequests().anyRequest().fullyAuthenticated();
+//        http.authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin();
+//        http.antMatcher("/users/**").authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin();
         http.authorizeRequests()
                 .anyRequest().permitAll().and();
 //        http.addFilter(customAuthenticationFilter) ;

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,10 +39,10 @@ public class DataTableService  {
         System.out.println(dataTableRepo.findByOwner(owner).get(0));
        return  dataTableRepo.findByOwner(owner);
     }
-    public void addTable(DataTable table) throws Exception {
+    public DataTable addTable(DataTable table) throws Exception {
         AppUser owner = userRepo.findByUsername(table.getOwner().getUsername());
         if (owner != null){
-            dataTableRepo.save(table);
+            return dataTableRepo.save(table);
         }else {
           throw new Exception("user not found in the database");
         }

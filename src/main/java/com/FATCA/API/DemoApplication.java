@@ -48,7 +48,7 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
 			userService.saveUser(new AppUser("mohamed","moh" , "password"));
 			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
-//			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
+			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
 			userService.saveUser(new AppUser("joe", "joe", "joespassword"));
 
 

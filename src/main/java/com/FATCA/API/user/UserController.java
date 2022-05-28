@@ -19,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -35,6 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 @Slf4j
+@CrossOrigin
 public class UserController  {
     //DONE:upload csv file
     //DONE:get all the csv files
@@ -100,8 +98,8 @@ public class UserController  {
     public ResponseEntity<?> uploadCSV(@RequestParam("file") MultipartFile file, String username) throws Exception {
         ArrayList<String[]> data = dataTableService.csvToArray(file);
         AppUser user = userService.getUser(username);
-        dataTableService.addTable(new DataTable(user, data));
-        return ResponseEntity.ok().body(data);
+         DataTable table = dataTableService.addTable(new DataTable(user, data, file.getOriginalFilename()));
+        return ResponseEntity.ok().body(table);
     }
 
 
@@ -111,4 +109,10 @@ public class UserController  {
 class RoleToUser {
     private String username;
     private String roleName;
+}
+@Data
+class  FileInfo {
+    private DataTable dataTable;
+    private String fileName;
+
 }
