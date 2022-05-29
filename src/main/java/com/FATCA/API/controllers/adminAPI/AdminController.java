@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -77,6 +78,19 @@ public class AdminController {
         String file = storageService.load(filename, "");
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file + "\"").body(file);
+    }
+    @GetMapping("/templates")
+    @ResponseBody
+    public ResponseEntity<?> getTemplates() throws Exception {
+        String file = storageService.getTemplate();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file + "\"").body(file);
+    }
+    @GetMapping("/xsdfiles")
+    @ResponseBody
+    public ResponseEntity<?>getXsdFiles(){
+        File[] listFiles = storageService.getXSDFiles();
+        return ResponseEntity.ok().body(listFiles);
     }
 
 }

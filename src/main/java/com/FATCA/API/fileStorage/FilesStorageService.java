@@ -1,4 +1,5 @@
 package com.FATCA.API.fileStorage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,4 +17,6 @@ public interface FilesStorageService {
     public Stream<Path> loadAll();
     public void insert(String filename, String content) throws IOException;
     public String getTemplate() throws Exception;
+    public File[] getXSDFiles();
+
 }

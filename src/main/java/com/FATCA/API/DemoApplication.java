@@ -49,12 +49,29 @@ public class DemoApplication {
 			userService.saveUser(new AppUser("mohamed","moh" , "password"));
 			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
 			userService.saveUser(new AppUser("ben", "ben", "benpassword"));
-			userService.saveUser(new AppUser("joe", "joe", "joespassword"));
+			userService.saveUser(new AppUser("aissa", "saad eddine", "joespassword"));
+			userService.saveUser(new AppUser("mohamed", "djamel", "joespassword"));
+			userService.saveUser(new AppUser("joe", "alaa", "joespassword"));
+			userService.saveUser(new AppUser("joe", "ratiba", "joespassword"));
+			userService.saveUser(new AppUser("joe", "karim", "joespassword"));
+			userService.saveUser(new AppUser("joe", "manel", "joespassword"));
+			userService.saveUser(new AppUser("joe", "samir", "joespassword"));
 
-
+			userService.addRole("mikasa", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("aissa", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("ben", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("moh", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("djamel", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("alaa", String.valueOf(Roles.ROLE_EDITOR));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
-			userService.addRole("aissa", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("saad eddine", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("alaa", String.valueOf(Roles.ROLE_EDITOR));
+			userService.addRole("ratiba", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("karim", String.valueOf(Roles.ROLE_ADMIN));
+			userService.addRole("manel", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("samir", String.valueOf(Roles.ROLE_EDITOR));
+
 
 		};
 	}

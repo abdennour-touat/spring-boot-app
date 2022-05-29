@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -143,6 +142,13 @@ public class FilesStorageServiceImpl implements FilesStorageService {
       }else {
           throw new Exception("directory is empty");
       }
+    }
+
+
+    @Override
+    public File[] getXSDFiles(){
+        File dir = new File(xsdStore.toUri());
+        return dir.listFiles();
     }
 }
 
