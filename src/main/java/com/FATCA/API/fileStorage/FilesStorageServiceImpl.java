@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -145,10 +146,14 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     }
 
 
+
     @Override
-    public File[] getXSDFiles(){
-        File dir = new File(xsdStore.toUri());
-        return dir.listFiles();
+    public Stream<Path> getXSDFiles(){
+        try{
+           return Files.walk(xsdStore, 1).filter(path -> !path.equals(xsdStore)).map(xsdStore::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

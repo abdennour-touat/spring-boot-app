@@ -17,6 +17,6 @@ public interface FilesStorageService {
     public Stream<Path> loadAll();
     public void insert(String filename, String content) throws IOException;
     public String getTemplate() throws Exception;
-    public File[] getXSDFiles();
+    public Stream<Path> getXSDFiles();
 
 }

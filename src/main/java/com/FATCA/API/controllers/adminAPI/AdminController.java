@@ -89,8 +89,13 @@ public class AdminController {
     @GetMapping("/xsdfiles")
     @ResponseBody
     public ResponseEntity<?>getXsdFiles(){
-        File[] listFiles = storageService.getXSDFiles();
-        return ResponseEntity.ok().body(listFiles);
+        List<FileInfo> fileInfos = storageService.getXSDFiles().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString()).build().toString();
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 
 }
@@ -99,3 +104,9 @@ class templateForm{
     private String localPart;
     private String xsdName;
 }
+
+//@Data
+//class filesForm{
+//    private String name;
+//    private String url;
+//}
