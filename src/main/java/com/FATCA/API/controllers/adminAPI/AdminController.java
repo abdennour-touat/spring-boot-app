@@ -3,6 +3,7 @@ package com.FATCA.API.controllers.adminAPI;
 import com.FATCA.API.converter.XmlFromXsdGen;
 import com.FATCA.API.fileStorage.FileInfo;
 import com.FATCA.API.fileStorage.FilesStorageService;
+import com.FATCA.API.fileStorage.FilesStorageServiceImpl;
 import com.FATCA.API.fileStorage.ResponseMessage;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import org.springframework.core.io.Resource;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -40,8 +43,8 @@ public class AdminController {
     FilesStorageService storageService;
     //this controller allows the user to get the template
     @GetMapping(path = "/getTemplate",produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<?> getTemplate( templateForm form) throws ParserConfigurationException, TransformerException {
-        String schema = storageService.load(form.getXsdName(), "xsd");
+    public ResponseEntity<?> getTemplate( templateForm form) throws ParserConfigurationException, TransformerException, IOException {
+        String schema = storageService.load(form.getXsdName(), "xsd").getFile().toString();
         String result = XmlFromXsdGen.generateXml(schema, form.getLocalPart(), new String[]{"ftc", "sfa"});
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(result, headers, HttpStatus.CREATED);
@@ -67,24 +70,28 @@ public class AdminController {
         List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
             String filename = path.getFileName().toString();
             String url = MvcUriComponentsBuilder
-                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString()).build().toString();
+                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString(), "").build().toString();
             return new FileInfo(filename, url);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
-    @GetMapping("/files/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<?> getFile(@PathVariable String filename) {
-        String file = storageService.load(filename, "");
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file + "\"").body(file);
-    }
+//    @GetMapping("/files/{filename:.+}")
+//    @ResponseBody
+//    public ResponseEntity<?> getFile(@PathVariable String filename) {
+//        String file = storageService.load(filename, "");
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file + "\"").body(file);
+//    }
     @GetMapping("/templates")
     @ResponseBody
     public ResponseEntity<?> getTemplates() throws Exception {
-        String file = storageService.getTemplate();
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file + "\"").body(file);
+        List<FileInfo> fileInfos = storageService.getTemplate().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString(), "template").build().toString();
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
     @GetMapping("/xsdfiles")
     @ResponseBody
@@ -92,10 +99,17 @@ public class AdminController {
         List<FileInfo> fileInfos = storageService.getXSDFiles().map(path -> {
             String filename = path.getFileName().toString();
             String url = MvcUriComponentsBuilder
-                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString()).build().toString();
+                    .fromMethodName(AdminController.class, "getFile", path.getFileName().toString(), "xsd").build().toString();
             return new FileInfo(filename, url);
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+    }
+    @GetMapping("/files/{filename:.+}/{path:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> getFile(@PathVariable String filename, @PathVariable String path) {
+        Resource file = storageService.load(filename, path);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
 }

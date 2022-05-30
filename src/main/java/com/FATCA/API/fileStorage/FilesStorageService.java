@@ -12,11 +12,15 @@ public interface FilesStorageService {
 //    void insert(String filename, long offset, byte[] content) throws IOException;
 
     public void save(MultipartFile file, String path);
-    public String load(String filename, String path);
+    public Resource load(String filename, String path);
     public void deleteAll();
+    String getTemplateString() throws  Exception;
     public Stream<Path> loadAll();
     public void insert(String filename, String content) throws IOException;
-    public String getTemplate() throws Exception;
+    public Stream<Path> getTemplate() throws Exception;
+
+    Resource loadFile(String filename);
+
     public Stream<Path> getXSDFiles();
 
 }

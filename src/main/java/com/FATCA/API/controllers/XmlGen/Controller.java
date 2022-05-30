@@ -40,7 +40,7 @@ public class Controller {
         String result = null;
         ByteArrayResource resource;
         try {
-            result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
+            result = XmlCsvGen.generate(data, filesStorageService.getTemplateString());
             resource = new ByteArrayResource(result.getBytes());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -61,7 +61,7 @@ public class Controller {
         byte[] stream;
         ByteArrayResource resource;
         try {
-            result = XmlCsvGen.generate(data, filesStorageService.getTemplate());
+            result = XmlCsvGen.generate(data, filesStorageService.getTemplateString());
             compressed = csvService.zipWithPassword(result, file.getOriginalFilename(), password);
              stream = compressed.getInputStream(compressed.getFileHeaders().get(0)).readAllBytes();
              resource = new ByteArrayResource(stream);

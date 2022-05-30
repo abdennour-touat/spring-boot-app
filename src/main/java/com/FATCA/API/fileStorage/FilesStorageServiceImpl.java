@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -82,14 +81,14 @@ public class FilesStorageServiceImpl implements FilesStorageService {
          }
     }
     @Override
-    public String load(String filename, String path) {
+    public Resource load(String filename, String path) {
         switch (path){
             case "xsd":
                 try {
                     Path file = xsdStore.resolve(filename);
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists() ) {
-                        return file.toString();
+                        return resource;
                     } else {
                         throw new RuntimeException("Could not read the file!");
                     }
@@ -101,7 +100,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                     Path file = templateStore.resolve(filename);
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists() ) {
-                        return file.toString();
+                        return resource;
                     } else {
                         throw new RuntimeException("Could not read the file!");
                     }
@@ -113,7 +112,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                     Path file = root.resolve(filename);
                     Resource resource = new UrlResource(file.toUri());
                     if (resource.exists()) {
-                        return file.toString();
+                        return resource;
                     } else {
                         throw new RuntimeException("Could not read the file!");
                     }
@@ -135,18 +134,37 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             throw new RuntimeException("Could not load the files!");
         }
     }
-    public String getTemplate() throws Exception {
-//        System.out.println(templateStore.toUri());
-      File dir = new File("uploads/templateFiles");
-      if (dir.isDirectory()){
-          return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
-      }else {
-          throw new Exception("directory is empty");
-      }
+    public Stream<Path> getTemplate() throws Exception {
+        try{
+            return Files.walk(templateStore, 1).filter(path -> !path.equals(templateStore)).map(xsdStore::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String getTemplateString() throws Exception {
+        File dir = new File("uploads/templateFiles");
+        if (dir.isDirectory()){
+            return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
+        }else {
+            throw new Exception("directory is empty");
+        }
     }
 
 
-
+    @Override
+    public Resource loadFile(String filename) {
+        try {
+            Path file = root.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
     @Override
     public Stream<Path> getXSDFiles(){
         try{
