@@ -65,11 +65,11 @@ public class DemoApplication {
 			userService.addRole("alaa", String.valueOf(Roles.ROLE_EDITOR));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_ADMIN));
 			userService.addRole("abdou", String.valueOf(Roles.ROLE_EDITOR));
-			userService.addRole("saad eddine", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("saad eddine", String.valueOf(Roles.ROLE_AUDITOR));
 			userService.addRole("alaa", String.valueOf(Roles.ROLE_EDITOR));
-			userService.addRole("ratiba", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("ratiba", String.valueOf(Roles.ROLE_AUDITOR));
 			userService.addRole("karim", String.valueOf(Roles.ROLE_ADMIN));
-			userService.addRole("manel", String.valueOf(Roles.ROLE_USER));
+			userService.addRole("manel", String.valueOf(Roles.ROLE_AUDITOR));
 			userService.addRole("samir", String.valueOf(Roles.ROLE_EDITOR));
 
 
