@@ -34,7 +34,7 @@ public class History {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "History_text", nullable = false)
-    private ArrayList<String> text;
+    private String text;
     private Date date;
 
 //    @OneToOne(mappedBy = "data_table_id")
@@ -48,11 +48,13 @@ public class History {
     private AppUser historyUser ;
 
 
-    public History(List<String> text, AppUser user){
+    public History(String text, AppUser user, DataTable table){
         this.date = new Date();
-        this.text = (ArrayList<String>) text;
+        this.text =text;
         this.historyUser  = user;
+        this.table = table;
     }
+
 
     @Override
     public boolean equals(Object o) {

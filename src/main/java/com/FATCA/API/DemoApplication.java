@@ -2,6 +2,8 @@ package com.FATCA.API;
 
 import com.FATCA.API.fileStorage.FilesStorageService;
 import com.FATCA.API.fileStorage.FilesStorageServiceImpl;
+import com.FATCA.API.history.History;
+import com.FATCA.API.history.HistoryService;
 import com.FATCA.API.user.AppUser;
 import com.FATCA.API.user.Roles;
 import com.FATCA.API.user.UserService;
@@ -40,7 +42,7 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserService userService, FilesStorageService storageService) {
+	public CommandLineRunner demo(UserService userService, FilesStorageService storageService, HistoryService historyService) {
 		return (args) -> {
 			storageService.deleteAll();
 			storageService.init();
@@ -71,7 +73,7 @@ public class DemoApplication {
 			userService.addRole("karim", String.valueOf(Roles.ROLE_ADMIN));
 			userService.addRole("manel", String.valueOf(Roles.ROLE_AUDITOR));
 			userService.addRole("samir", String.valueOf(Roles.ROLE_EDITOR));
-
+//			historyService.saveHistory(new History("",userService.getUser("saad eddine")));
 
 		};
 	}

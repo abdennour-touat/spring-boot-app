@@ -55,11 +55,11 @@ public class DataTableService  {
     public ArrayList<String[]> csvToArray(MultipartFile file){
         return (ArrayList<String[]>) csvService.getCsvFile(file);
     }
-    public DataTable updateTable(Long id, List<String[]> data, List<String> updateMessage, Long userId){
+    public DataTable updateTable(Long id, List<String[]> data, String updateMessage, Long userId){
         DataTable table = dataTableRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
         AppUser owner = userRepo.getById(userId);
-        historyService.saveHistory(new History(updateMessage, owner));
+        historyService.saveHistory(new History(updateMessage, owner, table));
 
         table.setData((ArrayList<String[]>) data);
 

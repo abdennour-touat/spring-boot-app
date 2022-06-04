@@ -40,6 +40,6 @@ public class DataTableController {
 @Data
 class UpdateData{
     private List<String[]> data;
-    private List<String> updateMessage;
+    private String updateMessage;
     private Long userId;
 }
