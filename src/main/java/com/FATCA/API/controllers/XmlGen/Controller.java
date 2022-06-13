@@ -2,6 +2,7 @@ package com.FATCA.API.controllers.XmlGen;
 
 import com.FATCA.API.converter.XmlCsvGen;
 import com.FATCA.API.fileStorage.FilesStorageService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
@@ -18,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 //import javax.swing.text.Element;
 
+import javax.swing.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,12 +38,12 @@ public class Controller {
 
 //    @PostMapping("/convert")
     @PostMapping(path="/convert" )
-    public ResponseEntity<?> convertToXml(@RequestParam("file")MultipartFile file){
-        List<String[]> data =csvService.getCsvFile(file);
+    public ResponseEntity<?> convertToXml(@RequestBody  ArrayData data){
+//        List<String[]> data =csvService.getCsvFile(file);
         String result = null;
         ByteArrayResource resource;
         try {
-            result = XmlCsvGen.generate(data, filesStorageService.getTemplateString());
+            result = XmlCsvGen.generate(data.getTable(), filesStorageService.getTemplateString());
             resource = new ByteArrayResource(result.getBytes());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -53,16 +56,16 @@ public class Controller {
                 .body(resource);
     }
     @PostMapping(path="/convertcompressed" )
-    public ResponseEntity<?> convertSecured(@RequestParam("file")MultipartFile file) {
-        List<String[]> data = csvService.getCsvFile(file);
+    public ResponseEntity<?> convertSecured(@RequestBody ArrayData data) {
+//        List<String[]> data = csvService.getCsvFile(file);
         String result = null;
         ZipFile compressed = null;
         char[] password = csvService.generatePassword(10);
         byte[] stream;
         ByteArrayResource resource;
         try {
-            result = XmlCsvGen.generate(data, filesStorageService.getTemplateString());
-            compressed = csvService.zipWithPassword(result, file.getOriginalFilename(), password);
+            result = XmlCsvGen.generate(data.getTable(), filesStorageService.getTemplateString());
+            compressed = csvService.zipWithPassword(result, data.getFilename(), password);
              stream = compressed.getInputStream(compressed.getFileHeaders().get(0)).readAllBytes();
              resource = new ByteArrayResource(stream);
              Files.delete(compressed.getFile().toPath());
@@ -77,5 +80,10 @@ public class Controller {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
-
+    @Data
+    static
+    class ArrayData {
+        private List<String[]> table;
+        private String filename;
+}
 }
