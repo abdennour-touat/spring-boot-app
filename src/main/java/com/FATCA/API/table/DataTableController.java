@@ -17,7 +17,6 @@ public class DataTableController {
     private final DataTableService dataTableService;
     @GetMapping("/getcsvFiles")
     public ResponseEntity<List<DataTable>> getCsvFiles(){
-        System.out.println(dataTableService.getAllTables().get(0).getOwner());
         return ResponseEntity.ok().body(dataTableService.getAllTables());
     }
     @GetMapping("/getcsvFiles/{id}")

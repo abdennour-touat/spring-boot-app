@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.ldap.authentication.UserDetailsServiceLdapAuthoritiesPopulator;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -41,9 +45,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http)throws Exception{
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), jwtUtility);
-        http.csrf().disable();
-        http.cors().disable();
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
+        http.csrf().disable();
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**" ).permitAll();
 //        http = http
@@ -59,12 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and();
 
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/**");
-//        http.authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin();
-//        http.antMatcher("/users/**").authorizeRequests().anyRequest().fullyAuthenticated().and().formLogin();
+
         http.authorizeRequests()
-                .anyRequest().permitAll().and();
-//        http.addFilter(customAuthenticationFilter) ;
-//        http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().permitAll();
+        http.addFilter(customAuthenticationFilter) ;
+        http.addFilterBefore(new CustomAuthorizationFilter(jwtUtility), UsernamePasswordAuthenticationFilter.class);
     }
     //in this method we apply the ldap authentication logic and tell it to check the credentials in the database at the same time
     @Override
@@ -80,6 +83,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordAttribute("userPassword")
                         .and().ldapAuthoritiesPopulator(new UserDetailsServiceLdapAuthoritiesPopulator(userDetailsService));
     }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("*")
+//                        .allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");
+//            }
+//        };
+//    }
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
