@@ -40,7 +40,6 @@ public class History {
 //    @OneToOne(mappedBy = "data_table_id")
     @PrimaryKeyJoinColumn
     @OneToOne
-    @JsonIgnore
     private DataTable  table;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_history"))

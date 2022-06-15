@@ -18,9 +18,9 @@ import java.util.List;
 @Slf4j
 public class historyController {
     private final HistoryService historyService;
-    @GetMapping("/getuserhistory/{id}")
-    public ResponseEntity<?> getUserHistory(@PathVariable("id") String id) throws Exception {
-        return ResponseEntity.ok().body(historyService.getUserHistory(Long.parseLong(id)));
+    @GetMapping("/getuserhistory/{username}")
+    public ResponseEntity<?> getUserHistory(@PathVariable("username") String username) throws Exception {
+        return ResponseEntity.ok().body(historyService.getUserHistory(username));
 
     }
 

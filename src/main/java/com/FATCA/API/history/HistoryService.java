@@ -18,10 +18,10 @@ public class HistoryService {
     public void saveHistory(History history ){
         historyRepo.save(history);
     }
-    public List<History> getUserHistory(Long id) throws Exception {
-        Optional<AppUser> user1 = userRepo.findById(id);
-        if(user1.isPresent()){
-            return historyRepo.findByHistoryUser(user1.get());
+    public List<History> getUserHistory(String username) throws Exception {
+        AppUser user1 = userRepo.findByUsername(username);
+        if(user1 !=null){
+            return historyRepo.findByHistoryUser(user1);
         }else {
             throw new Exception("user not found");
         }
