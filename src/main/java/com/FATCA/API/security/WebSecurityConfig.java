@@ -21,17 +21,19 @@ import org.springframework.security.ldap.authentication.UserDetailsServiceLdapAu
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
+//@EnableWebMvc
 @Configuration
 @RequiredArgsConstructor
 @ComponentScan(basePackages = {"com.FACTA.API"})
 //the websecurity config is where the authentication happens here we're making two types of authentication
 // we're attempting to authenticate the user in the ldap server and in our database at the same time
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     @Value("${ldap.auth.userdn}")
     private String userDn;
     @Value("${ldap.auth.base}")
@@ -83,17 +85,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordAttribute("userPassword")
                         .and().ldapAuthoritiesPopulator(new UserDetailsServiceLdapAuthoritiesPopulator(userDetailsService));
     }
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**")
-//                        .allowedOrigins("*")
-//                        .allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");
-//            }
-//        };
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/api/v1/**").allowedMethods("PUT", "DELETE");
 //    }
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{

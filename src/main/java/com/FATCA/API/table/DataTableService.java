@@ -60,10 +60,10 @@ public class DataTableService  {
     public ArrayList<List<HashMap<String, String>>> test (ArrayList<String[]> list){
         return (ArrayList<List<HashMap<String, String>>>) csvService.listToObject((List<String[]>) list);
     }
-    public DataTable updateTable(Long id, List<List<HashMap<String, String>>> data, String updateMessage, Long userId){
+    public DataTable updateTable(Long id, List<List<HashMap<String, String>>> data, String updateMessage, String username){
         DataTable table = dataTableRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
-        AppUser owner = userRepo.getById(userId);
+        AppUser owner = userRepo.findByUsername(username);
         historyService.saveHistory(new History(updateMessage, owner, table));
 
         table.setData((ArrayList<List<HashMap<String, String>>>) data);

@@ -28,10 +28,15 @@ public class DataTableController {
 
         return ResponseEntity.ok().body(dataTableService.getUserTables(identifier));
     }
-    @PutMapping("updateCsvFile/{id}")
+    @PostMapping("/updateCsvFile/{id}")
+//    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<?> updateCsvFile(@PathVariable("id") String id, @RequestBody UpdateData form){
+        System.out.println(id);
+        System.out.println(form.getData());
+        System.out.println(form.getUpdateMessage());
+        System.out.println(form.getUsername());
         if(!form.getData().isEmpty()){
-            return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), form.getData(), form.getUpdateMessage(), form.getUserId()));
+            return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), form.getData(), form.getUpdateMessage(), form.getUsername()));
         }else {
             return ResponseEntity.badRequest().body("invalid information");
         }
@@ -42,5 +47,5 @@ public class DataTableController {
 class UpdateData{
     private ArrayList<List<HashMap<String, String>>> data;
     private String updateMessage;
-    private Long userId;
+    private String username;
 }
