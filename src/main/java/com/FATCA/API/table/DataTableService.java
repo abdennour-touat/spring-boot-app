@@ -6,6 +6,7 @@ import com.FATCA.API.history.HistoryService;
 import com.FATCA.API.user.AppUser;
 import com.FATCA.API.user.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections.bag.HashBag;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +38,6 @@ public class DataTableService  {
     }
     public List<DataTable> getUserTables(Long id){
         AppUser owner = userRepo.getById(id);
-        System.out.println(dataTableRepo.findByOwner(owner).get(0));
        return  dataTableRepo.findByOwner(owner);
     }
     public DataTable addTable(DataTable table) throws Exception {
@@ -53,15 +54,19 @@ public class DataTableService  {
     }
 
     public ArrayList<String[]> csvToArray(MultipartFile file){
+        List<List<HashMap<String, String>>> data = csvService.listToObject(csvService.getCsvFile(file));
         return (ArrayList<String[]>) csvService.getCsvFile(file);
     }
-    public DataTable updateTable(Long id, List<String[]> data, String updateMessage, Long userId){
+    public ArrayList<List<HashMap<String, String>>> test (ArrayList<String[]> list){
+        return (ArrayList<List<HashMap<String, String>>>) csvService.listToObject((List<String[]>) list);
+    }
+    public DataTable updateTable(Long id, List<List<HashMap<String, String>>> data, String updateMessage, Long userId){
         DataTable table = dataTableRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
         AppUser owner = userRepo.getById(userId);
         historyService.saveHistory(new History(updateMessage, owner, table));
 
-        table.setData((ArrayList<String[]>) data);
+        table.setData((ArrayList<List<HashMap<String, String>>>) data);
 
         return dataTableRepo.save(table);
     }

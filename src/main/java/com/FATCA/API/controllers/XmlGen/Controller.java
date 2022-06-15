@@ -2,6 +2,7 @@ package com.FATCA.API.controllers.XmlGen;
 
 import com.FATCA.API.converter.XmlCsvGen;
 import com.FATCA.API.fileStorage.FilesStorageService;
+import com.FATCA.API.fileStorage.ResponseMessage;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -41,19 +43,20 @@ public class Controller {
     public ResponseEntity<?> convertToXml(@RequestBody  ArrayData data){
 //        List<String[]> data =csvService.getCsvFile(file);
         String result = null;
-        ByteArrayResource resource;
+        ByteArrayResource resource = null;
         try {
             result = XmlCsvGen.generate(data.getTable(), filesStorageService.getTemplateString());
             resource = new ByteArrayResource(result.getBytes());
+            HttpHeaders headers = new HttpHeaders();
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(resource.contentLength())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(resource);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        HttpHeaders headers = new HttpHeaders();
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentLength(resource.contentLength())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(resource);
+
     }
     @PostMapping(path="/convertcompressed" )
     public ResponseEntity<?> convertSecured(@RequestBody ArrayData data) {
@@ -83,7 +86,7 @@ public class Controller {
     @Data
     static
     class ArrayData {
-        private List<String[]> table;
+        private List<List<HashMap<String,String>>> table;
         private String filename;
 }
 }

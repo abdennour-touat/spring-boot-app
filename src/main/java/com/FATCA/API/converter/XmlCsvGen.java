@@ -17,31 +17,36 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class XmlCsvGen {
-    public static String generate(List<String[]> data, String templatePath) {
+    public static String generate(List<List<HashMap<String,String>>> data, String templatePath) {
         try {
             //build the document from the template path..
             Document doc = buildDocument(templatePath);
             NodeList links = filterNodes((Element) doc.getElementsByTagName("links").item(0).getChildNodes());
             Element allLinks = (Element) links;
-            ArrayList<String[]> table = new ArrayList<>(data.subList(0, data.size()));
+            ArrayList<List<HashMap<String,String>>> table = new ArrayList<>(data.subList(0, data.size()));
 
             //we get the first line containing the columns names
-            ArrayList<String> columns = new ArrayList<>(Arrays.asList(data.get(0)));
+            ArrayList<HashMap<String,String>> columns = new ArrayList<>(data.get(0));
             //set every column to lowercase
-            Utils.listToLowerCase(columns);
+            List<String> cols =new ArrayList<>();
+                    columns.forEach(item-> {
+                cols.add(item.get("value"));
+            });
+            Utils.listToLowerCase(cols);
             Element temp = getTemp(doc);
 
             //we loop through every line and try to insert every value possible...
             for (int lineCount = 1; lineCount < table.size(); lineCount++) {
                 //we get the line of data
-                ArrayList<String> dataLine = new ArrayList<>(Arrays.stream(table.get(lineCount)).toList());
+                ArrayList<HashMap<String, String>> dataLine = new ArrayList<>(table.get(lineCount));
                 //get the first value that contains the type..
-                int type = columns.contains("type") ? Integer.parseInt(dataLine.get(0)) - 1 : 0;
+                int type = cols.contains("type") ? Integer.parseInt(dataLine.get(0).get("value")) - 1 : 0;
                 //we get the corresponding iterative tag with the type
-                if(allLinks.getElementsByTagName(links.item(0).getNodeName()).getLength() < Integer.parseInt(dataLine.get(0))){
+                if(allLinks.getElementsByTagName(links.item(0).getNodeName()).getLength() < Integer.parseInt(dataLine.get(0).get("value"))){
                     type = 0;
                 }
                 Node selectedNode = allLinks.getElementsByTagName(links.item(0).getNodeName()).item(type);
@@ -57,7 +62,7 @@ public class XmlCsvGen {
                 //we get the child nodes that have the links with the csv file
                 NodeList nodeBlock = selectedNode.getChildNodes();
                 //now we loop through the links blocks to find the match
-                insertBlocks(nodeBlock, columns, newElement, dataLine);
+                insertBlocks(nodeBlock, cols, newElement, dataLine);
                 parent.appendChild(newElement);
             }
             //delete the sample nodes..
@@ -85,7 +90,7 @@ public class XmlCsvGen {
         return null;
     }
 
-    public static void insertBlocks(NodeList nodeList, List<String> list, Element elt, List<String> data) {
+    public static void insertBlocks(NodeList nodeList, List<String> list, Element elt, List<HashMap<String,String>> data) {
         for (int itemCount = 0; itemCount < nodeList.getLength(); itemCount++) {
 
             //if we find a match columns we take the data line and insert all the valid data....
@@ -109,7 +114,7 @@ public class XmlCsvGen {
         }
     }
 
-    static void insertIndexed(Node nd, Element elt, List<String> list, List<String> data) {
+    static void insertIndexed(Node nd, Element elt, List<String> list, List<HashMap<String,String>> data) {
 
         //we get all the element from the template
         Node parent = nd.getParentNode();
@@ -128,7 +133,7 @@ public class XmlCsvGen {
 //                isContained(parent.getChildNodes(), nodeList.item(item).getNodeName());
                 if (nodeList.item(item).getParentNode().getNodeName().equals(parent.getNodeName())) {
 //                if (isContained(parent.getChildNodes(), nodeList.item(item).getNodeName())) {
-                    String info = data.get(list.indexOf(nd.getTextContent().toLowerCase()));
+                    String info = data.get(list.indexOf(nd.getTextContent().toLowerCase())).get("value");
                     Node newNode = nodeContent.item(0).cloneNode(true);
                     newNode.setNodeValue(info);
 
@@ -142,7 +147,7 @@ public class XmlCsvGen {
         }
     }
 
-    static void insert(Node nd, Element elt, List<String> list, List<String> data) {
+    static void insert(Node nd, Element elt, List<String> list, List<HashMap<String,String>> data) {
 
         //we get all the element from the template
         NodeList nodeList = elt.getElementsByTagName(nd.getNodeName());
@@ -156,7 +161,7 @@ public class XmlCsvGen {
             //or else it  means theres other nodes and we can't make a change on it
             if (nodeContent.getLength() <= 1) {
 
-                String info = data.get(list.indexOf(nd.getTextContent().toLowerCase()));
+                String info = data.get(list.indexOf(nd.getTextContent().toLowerCase())).get("value");
                 Node newNode = nodeContent.item(0).cloneNode(true);
                 newNode.setNodeValue(info);
 

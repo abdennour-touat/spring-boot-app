@@ -98,8 +98,9 @@ public class UserController  {
     @PostMapping("/uploadcsv")
     public ResponseEntity<?> uploadCSV(@RequestParam("file") MultipartFile file, String username) throws Exception {
         ArrayList<String[]> data = dataTableService.csvToArray(file);
+        ArrayList<List<HashMap<String, String>>> obj = dataTableService.test(data);
         AppUser user = userService.getUser(username);
-         DataTable table = dataTableService.addTable(new DataTable(user, data, file.getOriginalFilename()));
+         DataTable table = dataTableService.addTable(new DataTable(user, obj, file.getOriginalFilename()));
         return ResponseEntity.ok().body(table);
     }
 

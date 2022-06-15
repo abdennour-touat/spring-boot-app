@@ -9,9 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 
@@ -38,7 +36,7 @@ public class DataTable {
     private Long id;
     @Column()
 //    @JsonIgnore
-    private ArrayList<String[]> data ;
+    private ArrayList<List<HashMap<String, String>>> data ;
     @Column
     private String fileName;
 
@@ -52,7 +50,7 @@ public class DataTable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private AppUser owner;
 
-    public DataTable(AppUser user, ArrayList<String[]> data, String fileName){
+    public DataTable(AppUser user, ArrayList<List<HashMap<String, String>>> data, String fileName){
         this.data = data;
         this.owner = user;
         this.uploadDate = new Date();

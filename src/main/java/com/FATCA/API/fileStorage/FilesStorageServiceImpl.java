@@ -143,10 +143,10 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     }
     public String getTemplateString() throws Exception {
         File dir = new File("uploads/templateFiles");
-        if (dir.isDirectory()){
+        if (dir.isDirectory() && Objects.requireNonNull(dir.listFiles()).length > 0){
             return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
         }else {
-            throw new Exception("directory is empty");
+            throw new Exception("Aucun");
         }
     }
 

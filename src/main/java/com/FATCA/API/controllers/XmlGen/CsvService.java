@@ -1,6 +1,5 @@
 package com.FATCA.API.controllers.XmlGen;
 
-import com.FATCA.API.fileStorage.FilesStorageService;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.model.enums.AesKeyStrength;
@@ -12,26 +11,42 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 //@Component
 public class CsvService {
+    public ArrayList<List<HashMap<String,String>>> listToObject(List<String[]> list){
+        ArrayList<List<HashMap<String,String>>>  result = new ArrayList<>();
+
+        Iterator<String[]> it = list.iterator();
+        int i =0;
+        while (it.hasNext()){
+            List<HashMap<String,String>> line = new ArrayList<>();
+            for(String str: it.next()) {
+                HashMap<String,String>  map = new HashMap<>();
+                map.put("value", str);
+                line.add(map);
+
+            }
+            result.add(line);
+        }
+        return result;
+    }
     public List<String[]> getCsvFile(MultipartFile file) {
         if (!file.isEmpty()) {
             BufferedReader br;
             List<String[]> result = new ArrayList<>();
+
             try {
-                String[] line;
+                 String[] line;
                 String ln;
                 InputStream is = file.getInputStream();
                 br = new BufferedReader(new InputStreamReader(is));
 
                 while ((ln = br.readLine()) != null) {
 
-                    line = ln.split(";");
+                   line = ln.split(";");
 
                     result.add(line);
                 }

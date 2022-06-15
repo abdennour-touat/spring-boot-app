@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -38,7 +40,7 @@ public class DataTableController {
 
 @Data
 class UpdateData{
-    private List<String[]> data;
+    private ArrayList<List<HashMap<String, String>>> data;
     private String updateMessage;
     private Long userId;
 }
