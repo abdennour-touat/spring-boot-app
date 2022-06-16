@@ -54,22 +54,22 @@ public class DemoApplication {
 		};
 	}
 	@Bean
-	public CommandLineRunner demo(UserService userService, FilesStorageService storageService, HistoryService historyService) {
+	public CommandLineRunner demo(UserService userService, FilesStorageService storageService) {
 		return (args) -> {
 			storageService.deleteAll();
 			storageService.init();
-//			userService.saveUser(new AppUser("abdenour","abdou" , "password"));
-//			userService.saveUser(new AppUser("badr","aissa" , "aissa"));
-//			userService.saveUser(new AppUser("mohamed","moh" , "password"));
-//			userService.saveUser(new AppUser("ackerman","mikasa" , "password"));
+		userService.saveUser(new AppUser("abdenour","abdou" , "ROLE_AUDITOR"));
+			userService.saveUser(new AppUser("badr","aissa" , "ROLE_AUDITOR"));
+			userService.saveUser(new AppUser("mohamed","moh" , "ROLE_AUDITOR"));
+			userService.saveUser(new AppUser("ackerman","mikasa" , "ROLE_AUDITOR"));
 			userService.saveUser(new AppUser("ben", "ben", "ROLE_ADMIN"));
-//			userService.saveUser(new AppUser("aissa", "saad eddine", "joespassword"));
-//			userService.saveUser(new AppUser("mohamed", "djamel", "joespassword"));
-//			userService.saveUser(new AppUser("joe", "alaa", "joespassword"));
-//			userService.saveUser(new AppUser("joe", "ratiba", "joespassword"));
-//			userService.saveUser(new AppUser("joe", "karim", "joespassword"));
-//			userService.saveUser(new AppUser("joe", "manel", "joespassword"));
-//			userService.saveUser(new AppUser("joe", "samir", "joespassword"));
+			userService.saveUser(new AppUser("aissa", "saad eddine", "ROLE_ADMIN"));
+			userService.saveUser(new AppUser("mohamed3", "djamel", "ROLE_ADMIN"));
+			userService.saveUser(new AppUser("joe1", "alaa", "ROLE_AUDITOR"));
+			userService.saveUser(new AppUser("joe2", "ratiba", "ROLE_EDITOR"));
+			userService.saveUser(new AppUser("joe3", "karim", "ROLE_EDITOR"));
+			userService.saveUser(new AppUser("joe4", "manel", "ROLE_EDITOR"));
+			userService.saveUser(new AppUser("joe5", "samir", "ROLE_EDITOR"));
 
 //			userService.addRole("mikasa", String.valueOf(Roles.ROLE_EDITOR));
 //			userService.addRole("aissa", String.valueOf(Roles.ROLE_EDITOR));

@@ -64,10 +64,10 @@ public class DataTableService  {
         DataTable table = dataTableRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("table not found for this id :: " + id));
         AppUser owner = userRepo.findByUsername(username);
-        historyService.saveHistory(new History(updateMessage, owner, table));
 
         table.setData((ArrayList<List<HashMap<String, String>>>) data);
 
+        historyService.saveHistory(new History(updateMessage, owner, table));
         return dataTableRepo.save(table);
     }
 }

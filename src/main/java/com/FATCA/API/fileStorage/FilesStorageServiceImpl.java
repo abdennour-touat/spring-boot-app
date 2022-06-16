@@ -146,7 +146,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
         if (dir.isDirectory() && Objects.requireNonNull(dir.listFiles()).length > 0){
             return Objects.requireNonNull(dir.listFiles())[0].getAbsolutePath();
         }else {
-            throw new Exception("Aucun");
+            throw new Exception("Aucun fichier modele specifie");
         }
     }
 

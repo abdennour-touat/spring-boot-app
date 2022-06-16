@@ -38,7 +38,8 @@ public class History {
     private Date date;
 
 //    @OneToOne(mappedBy = "data_table_id")
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "table_id", foreignKey = @ForeignKey(name = "fk_table_history"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
     private DataTable  table;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
