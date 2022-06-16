@@ -69,7 +69,6 @@ public class UserService implements UserDetailsService {
     public void deleteUser (Long userId){
 
         AppUser user = userRepo.getById(userId);
-        System.out.println(user);
         userRepo.delete(user);
     }
 

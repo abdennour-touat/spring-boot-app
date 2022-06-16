@@ -31,10 +31,7 @@ public class DataTableController {
     @PostMapping("/updateCsvFile/{id}")
 //    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<?> updateCsvFile(@PathVariable("id") String id, @RequestBody UpdateData form){
-        System.out.println(id);
-        System.out.println(form.getData());
-        System.out.println(form.getUpdateMessage());
-        System.out.println(form.getUsername());
+
         if(!form.getData().isEmpty()){
             return  ResponseEntity.ok().body(dataTableService.updateTable(Long.parseLong(id), form.getData(), form.getUpdateMessage(), form.getUsername()));
         }else {
