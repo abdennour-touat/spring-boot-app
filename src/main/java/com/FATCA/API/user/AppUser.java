@@ -45,7 +45,7 @@ public class AppUser {
     )
     @JsonIgnore
     private String password;
-    private ArrayList<String> roles = new ArrayList<>();
+    private String role ;
 
     @JsonIgnore
     @OneToMany(mappedBy = "historyUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -56,10 +56,11 @@ public class AppUser {
     public AppUser() {
     }
 
-    public AppUser( String name, String username, String password) {
+    public AppUser(  String username, String password, String role) {
 //        this.name = name;
         this.password = password;
         this.username = username;
+        this.role = role;
     }
 
     @Override

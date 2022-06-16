@@ -49,20 +49,27 @@ public class UserController  {
         return ResponseEntity.ok().body(userService.getUsers());
     }
     @PostMapping("/user/save")
-    public ResponseEntity<AppUser> saveUser(@RequestBody AppUser user) {
+    public ResponseEntity<AppUser> saveUser(@RequestBody UserInfo user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+        AppUser newUser = new AppUser(user.getUsername(), user.getPassword(), user.getRole());
+        return ResponseEntity.created(uri).body(userService.saveUser(newUser));
     }
     @GetMapping("/admin/role")
     public ResponseEntity<List<String>> getRoles(){
         return ResponseEntity.ok().body(Roles.getRoles());
 
     }
+    @PostMapping("/admin/user/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") String userId){
+        System.out.println(userId);
+        userService.deleteUser(Long.parseLong(userId));
+        return ResponseEntity.ok().body("deleted");
+    }
 
-    @PostMapping("/admin/role/affectrole")
-    public ResponseEntity<?> affectRole(@RequestBody RoleToUser form) {
-        userService.addRole(form.getUsername(), form.getRoleName());
-        return ResponseEntity.ok().build();
+    @PostMapping("/admin/user/update")
+    public ResponseEntity<?> updateUser(@RequestBody RoleToUser form) {
+        userService.addRole(form.getUsername(), form.getRoleName(), form.getNewUsername());
+        return ResponseEntity.ok().body("yes");
     }
     //this method is to refresh the token when it expires..
     @GetMapping("/token/refresh")
@@ -108,6 +115,7 @@ public class UserController  {
 }
 @Data
 class RoleToUser {
+    private String newUsername;
     private String username;
     private String roleName;
 }
@@ -115,4 +123,10 @@ class RoleToUser {
 class  FileInfo {
     private DataTable dataTable;
     private String fileName;
+}
+@Data
+class UserInfo {
+    private String username;
+    private String password;
+    private String role;
 }

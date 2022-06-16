@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * The user service class contains functions to get the user data from the database
@@ -40,9 +41,8 @@ public class UserService implements UserDetailsService {
         }
         //we make a list of granted authroties to add it to the user details service
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role));
-        });
+
+        authorities.add(new SimpleGrantedAuthority(user.getRole()));
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 
@@ -55,12 +55,22 @@ public class UserService implements UserDetailsService {
 
     ;
 
-    public void addRole(String username, String roleName) {
+    public void addRole(String username, String roleName, String newUsename) {
         log.info("adding a role {} to user {} ", roleName, username);
         AppUser user = userRepo.findByUsername(username);
         if (user != null) {
-            user.getRoles().add(roleName);
+            if (!Objects.equals(newUsename, "")){
+
+                user.setUsername(newUsename);
+            }
+            user.setRole(roleName);
         }
+    }
+    public void deleteUser (Long userId){
+
+        AppUser user = userRepo.getById(userId);
+        System.out.println(user);
+        userRepo.delete(user);
     }
 
     public AppUser getUser(String username) {
