@@ -18,12 +18,14 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     private final Path xsdStore = Paths.get("uploads/xsdFiles/");
 
     private final Path templateStore = Paths.get("uploads/templateFiles/");
+    private final Path zipFilesStore = Paths.get("uploads/zipFiles/");
     @Override
     public void init() {
         try {
             Files.createDirectory(root);
             Files.createDirectory(xsdStore);
             Files.createDirectory(templateStore);
+            Files.createDirectory(zipFilesStore);
             Files.createFile(Paths.get("uploads/main.txt"));
 //            Files.createFile(Paths.get("uploads/finalFile.xml"));
         } catch (IOException e) {
@@ -107,6 +109,18 @@ public class FilesStorageServiceImpl implements FilesStorageService {
                 } catch (MalformedURLException e) {
                     throw new RuntimeException("Error: " + e.getMessage());
                 }
+            case  "zip":
+                try {
+                    Path file = zipFilesStore.resolve(filename);
+                    Resource resource = new UrlResource(file.toUri());
+                    if (resource.exists() ) {
+                        return resource;
+                    } else {
+                        throw new RuntimeException("Could not read the file!");
+                    }
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Error: " + e.getMessage());
+                }
             default:
                 try {
                     Path file = root.resolve(filename);
@@ -141,6 +155,62 @@ public class FilesStorageServiceImpl implements FilesStorageService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void deleteZipFiles() throws IOException {
+        FileSystemUtils.deleteRecursively(zipFilesStore);
+        Files.createDirectory(zipFilesStore);
+
+    }
+
+    @Override
+    public void deleteZipFiles(String filename, String path) throws IOException {
+        switch (path){
+            case "xsd":
+                try {
+                    Path file = xsdStore.resolve(filename);
+                    FileSystemUtils.deleteRecursively(file);
+
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Error: " + e.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "template":
+                try {
+                    Path file = templateStore.resolve(filename);
+                    FileSystemUtils.deleteRecursively(file);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case  "zip":
+                try {
+                    Path file = zipFilesStore.resolve(filename);
+                    FileSystemUtils.deleteRecursively(file);
+
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Error: " + e.getMessage());
+                }
+                break;
+            default:
+                try {
+                    Path file = root.resolve(filename);
+                    FileSystemUtils.deleteRecursively(file);
+
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Error: " + e.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+        }
+
+    }
+
     public String getTemplateString() throws Exception {
         File dir = new File("uploads/templateFiles");
         if (dir.isDirectory() && Objects.requireNonNull(dir.listFiles()).length > 0){
@@ -156,7 +226,7 @@ public class FilesStorageServiceImpl implements FilesStorageService {
         try {
             Path file = root.resolve(filename);
             Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
+            if (resource.exists()) {
                 return resource;
             } else {
                 throw new RuntimeException("Could not read the file!");

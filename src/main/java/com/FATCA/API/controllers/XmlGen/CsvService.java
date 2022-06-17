@@ -1,6 +1,7 @@
 package com.FATCA.API.controllers.XmlGen;
 
 import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.model.enums.AesKeyStrength;
 import net.lingala.zip4j.model.enums.CompressionLevel;
@@ -83,21 +84,19 @@ public class CsvService {
     public ZipFile zipWithPassword(String data, String fileName, char[] password) throws IOException {
         ZipParameters zipParameters = new ZipParameters();
         zipParameters.setEncryptFiles(true);
-
         zipParameters.setCompressionLevel(CompressionLevel.NORMAL);
         zipParameters.setEncryptionMethod(EncryptionMethod.AES);
         zipParameters.setAesKeyStrength(AesKeyStrength.KEY_STRENGTH_256);
 
-
         File folder = new File("uploads/xmlFile");
         if (folder.mkdir()) {
-            File f = new File("uploads/" + folder.getName() + "/" + fileName + ".xml");
+            File f = new File("uploads/" + folder.getName() + "/" + fileName.replace(".csv", "").replace(".CSV", "") + ".xml");
             ZipFile zipFile = null;
             if (f.createNewFile()) {
                 FileWriter fw = new FileWriter(f);
                 fw.write(data);
                 fw.close();
-                zipFile = new ZipFile("uploads/" + fileName + ".zip", password);
+                zipFile = new ZipFile("uploads/zipFiles/" + fileName + ".zip", password);
 
                 zipFile.addFolder(folder, zipParameters);
 
@@ -108,7 +107,7 @@ public class CsvService {
             File[] files = folder.listFiles();
             assert files != null;
             for(File file : files) {
-                System.out.println(file + " deleted.");
+//                System.out.println(file + " deleted.");
 
                 Files.delete(file.toPath());
             }

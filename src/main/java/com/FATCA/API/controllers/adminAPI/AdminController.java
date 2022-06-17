@@ -95,13 +95,14 @@ public class AdminController {
     }
     @GetMapping("/xsdfiles")
     @ResponseBody
-    public ResponseEntity<?>getXsdFiles(){
+    public ResponseEntity<?>getXsdFiles() throws IOException {
         List<FileInfo> fileInfos = storageService.getXSDFiles().map(path -> {
             String filename = path.getFileName().toString();
             String url = MvcUriComponentsBuilder
                     .fromMethodName(AdminController.class, "getFile", path.getFileName().toString(), "xsd").build().toString();
             return new FileInfo(filename, url);
         }).collect(Collectors.toList());
+        storageService.deleteZipFiles();
         return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
     @GetMapping("/files/{filename:.+}/{path:.+}")

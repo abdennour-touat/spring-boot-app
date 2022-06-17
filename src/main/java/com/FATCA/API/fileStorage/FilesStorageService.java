@@ -14,12 +14,17 @@ public interface FilesStorageService {
     public void save(MultipartFile file, String path);
     public Resource load(String filename, String path);
     public void deleteAll();
+
+    void deleteZipFiles(String filename, String path) throws IOException;
+
     String getTemplateString() throws  Exception;
     public Stream<Path> loadAll();
     public void insert(String filename, String content) throws IOException;
     public Stream<Path> getTemplate() throws Exception;
+    void deleteZipFiles() throws IOException;
 
     Resource loadFile(String filename);
+
 
     public Stream<Path> getXSDFiles();
 
